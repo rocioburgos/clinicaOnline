@@ -1,4 +1,6 @@
+ 
 <form [formGroup]='formularioEspecialista' (ngSubmit)='aceptarEspecialista()'>
+  <app-spinner></app-spinner>
     <div class="form-group">
       <input type="text" formControlName='nombre_' class="fadeIn second" placeholder="Nombre"><br>
       <small class="form-text text-muted"
@@ -119,6 +121,7 @@
       </div>
       <div class="modal-body">
         <form [formGroup]='formulario_Especialidad' (ngSubmit)='aceptarEspecialidad()'>
+          <app-spinner></app-spinner>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Especialidad:</label>
             <input type="text" class="form-control" id="recipient-name" formControlName='nombre'>

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { SpinnerService } from '../spinner/spinner.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,12 +10,13 @@ export class UsuarioService {
 
   private usuariosCollection: AngularFirestoreCollection<any>;
 
-  constructor(private readonly afs: AngularFirestore) {
+  constructor(private readonly afs: AngularFirestore ) {
     this.usuariosCollection = afs.collection('usuarios');
   }
   
   setItemWithId(item:any, id:string) {
-    return this.usuariosCollection.doc(id).set(Object.assign({}, {uid: id, ...item}  ));    
+     
+    return this.usuariosCollection.doc(id).set(Object.assign({}, {uid: id, ...item}  )) ;    
   }
 
   traerUsuarios(){ 

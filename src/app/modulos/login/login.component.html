@@ -1,8 +1,9 @@
 <div class="wrapper fadeInDown">
+  
     <div id="formContent">
       <!-- Tabs Titles -->
       <h2 class="active"> Ingreso</h2>
-  
+   <app-spinner></app-spinner>
       <!-- Icon -->
       <div class="fadeIn first">
         <img src="./../../../assets/user.png" id="icon" alt="User Icon" />
@@ -10,6 +11,7 @@
       <div>
         <!-- Login Form -->
         <form  [formGroup]='formulario' (ngSubmit)='login()' >
+          
          <div class="form-group">
           <input type="email" class="fadeIn second" formControlName='email' placeholder="Email"><br>
           <small class="form-text text-muted"
@@ -26,6 +28,7 @@
         </form>
         <p> {{mensaje}} </p>
       </div>
+      
       <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
         <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
         <button class="btn btn-outline-primary" for="btnradio1" (click)='completar("especialista")'>Especialista</button>

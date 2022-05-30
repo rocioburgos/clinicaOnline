@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/servicios/auth/auth.service';
+import { SpinnerService } from 'src/app/servicios/spinner/spinner.service';
 import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class LoginComponent  {
   formulario: FormGroup;
   mensaje: string = '';
   constructor(private fb: FormBuilder, private authSrv: AuthService, private router: Router,
-    private usrSrv: UsuarioService) {
+    private usrSrv: UsuarioService, private spinnerSrv:SpinnerService) {
     this.formulario = fb.group({
       email: ['', [Validators.required, Validators.email]],
       clave: ['', Validators.required],
@@ -23,6 +24,7 @@ export class LoginComponent  {
  
 
   async login() {
+    this.spinnerSrv.show();
     const form = this.formulario.value;
     let datos = {
       email: form.email,
@@ -56,6 +58,8 @@ export class LoginComponent  {
       }); 
     } catch (err) {
       console.log(err);
+    }finally{
+      this.spinnerSrv.hide();
     }
   }
 

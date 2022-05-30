@@ -4,7 +4,9 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/servicios/auth/auth.service';
 import { FilesService } from 'src/app/servicios/files/files.service';
-import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';  
+import { SpinnerService } from 'src/app/servicios/spinner/spinner.service';
+import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
+import { SpinnerComponent } from 'src/app/shared/spinner/spinner.component';
 @Component({
   selector: 'app-registro-paciente',
   templateUrl: './registro-paciente.component.html',
@@ -29,7 +31,8 @@ export class RegistroPacienteComponent implements OnInit {
     private authSrv: AuthService,
     private usuariosSrv: UsuarioService,
     private router: Router,
-    private fileSrv: FilesService) {
+    private fileSrv: FilesService,
+    private spinnerSrv: SpinnerService) {
     this.paciente = null;
     this.captcha = '';
     this.formulario = fb.group({
@@ -52,10 +55,11 @@ export class RegistroPacienteComponent implements OnInit {
   resolved(captchaResponse: string) {
     this.captcha = captchaResponse;
     console.log('resolved captcha with response: ' + this.captcha);
-}
+  }
 
 
   async aceptarPaciente() {
+    this.spinnerSrv.show();
     const form = this.formulario.value;
     this.completarForm = false;
     let datos = {
@@ -74,10 +78,14 @@ export class RegistroPacienteComponent implements OnInit {
     try {
       const user = await this.authSrv.registerUser(datos.email, datos.clave).then((credential) => {
         this.usuariosSrv.setItemWithId(datos, credential.user.uid)
-          .then(() => this.router.navigate(['activarUsuario']));;
+          .then(() => {
+            this.spinnerSrv.hide();
+            this.router.navigate(['activarUsuario'])
+          });;
       });
     } catch (error) {
       console.log(error);
+      this.spinnerSrv.hide();
       this.mensaje = '' + error;
     }
 
@@ -91,10 +99,12 @@ export class RegistroPacienteComponent implements OnInit {
 
   //Evento que se gatilla cuando el input de tipo archivo cambia
   public cambioArchivo1(event: any) {
+    this.spinnerSrv.show();
     this.img1 = this.getFilePath();
     let task = this.fileSrv.uploadFile(this.img1, event.target.files[0]).then((res) => {
       res.ref.getDownloadURL()
         .then(ress => {
+          this.spinnerSrv.hide();
           this.img1 = (ress);
         });
     });
@@ -103,11 +113,12 @@ export class RegistroPacienteComponent implements OnInit {
 
   //Evento que se gatilla cuando el input de tipo archivo cambia
   public cambioArchivo2(event: any) {
-
+    this.spinnerSrv.show();
     this.img2 = this.getFilePath();
     let task = this.fileSrv.uploadFile(this.img2, event.target.files[0]).then((res) => {
       res.ref.getDownloadURL()
         .then(ress => {
+          this.spinnerSrv.hide();
           this.img2 = (ress);
         });
     });

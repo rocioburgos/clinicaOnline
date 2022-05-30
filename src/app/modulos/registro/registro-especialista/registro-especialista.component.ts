@@ -6,6 +6,7 @@ import { EspecialidadesService } from 'src/app/servicios/especialidades/especial
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FilesService } from 'src/app/servicios/files/files.service';
 import { UsuarioService } from 'src/app/servicios/usuario/usuario.service'; 
+import { SpinnerService } from 'src/app/servicios/spinner/spinner.service';
 @Component({
   selector: 'app-registro-especialista',
   templateUrl: './registro-especialista.component.html',
@@ -21,7 +22,6 @@ export class RegistroEspecialistaComponent  {
  // Seleccionamos o iniciamos el valor '0' del <select>
  opcionSeleccionado: string = '0';
  verSeleccion: string = '';
-
  formularioEspecialista: FormGroup;
  formulario_Especialidad: FormGroup;
  completarForm = true;
@@ -29,9 +29,7 @@ export class RegistroEspecialistaComponent  {
  img = '';
  mensajeImagen: string = '';
  image: any;
-
  public mensajeArchivo = 'No hay un archivo seleccionado';
-
  public nombreArchivo = '';
  public URLPublica = '';
  public porcentaje = 0;
@@ -47,14 +45,12 @@ export class RegistroEspecialistaComponent  {
    private especialidadesSrv: EspecialidadesService,
    private authSrv: AuthService,
    private fileSrv: FilesService,
-   private modalService: NgbModal) {
-
+   private modalService: NgbModal,
+   private spinnerSrv:SpinnerService ) {
    this.captcha = '';
    this.especialidadesSrv.traerEspecialidades().subscribe((res) => {
      this.especialidades = res;
    });
-
-
 
    this.formularioEspecialista = fbesp.group({
      nombre_: ['', Validators.required],
@@ -65,13 +61,11 @@ export class RegistroEspecialistaComponent  {
      clave: ['', Validators.required, Validators.minLength(6)],
      archivo: [null, [Validators.required]],
      especialidadCheck: [null, this.validarEspecialidad] 
-     
    });
 
    this.formulario_Especialidad = fb.group({
      nombre: ['', [Validators.required]]
    });
-
  }
  
 
@@ -92,6 +86,7 @@ export class RegistroEspecialistaComponent  {
 
 
  async aceptarEspecialista() {
+   this.spinnerSrv.show();
    const formEspe = this.formularioEspecialista.value;
    this.completarForm = false;
    let datos = {
@@ -111,24 +106,30 @@ export class RegistroEspecialistaComponent  {
    try {
      const user = await this.authSrv.registerUser(datos.email, datos.clave).then((credential) => {
        this.usuariosSrv.setItemWithId(datos, credential.user.uid)
-         .then(() => this.router.navigate(['activarUsuario']));;
+         .then(() => {
+          this.spinnerSrv.hide();
+           this.router.navigate(['activarUsuario'])
+          });;
      });
    } catch (error) {
      console.log(error);
+     this.spinnerSrv.hide();
      this.mensaje = '' + error;
-   }
+   } 
  }
 
 
  aceptarEspecialidad() {
+   
+  this.spinnerSrv.show();
    const form = this.formulario_Especialidad.value;
    this.completarForm = false;
    let datos = {
      nombre: form.nombre
-   }
-
+   } 
    this.especialidadesSrv.registrarEspecialidad(datos).then((res) => {
-     console.log(datos);
+     this.spinnerSrv.hide();
+     console.log(datos); 
      this.mensaje = 'Especialidad creada';
      this.modalService.open(this.myModalConf).close('Si');
    });
@@ -154,10 +155,12 @@ export class RegistroEspecialistaComponent  {
 
  //Sube el archivo a Cloud Storage
  async subirArchivo(data: any) {
+  this.spinnerSrv.show();
    this.img = this.getFilePath()
    let task = this.fileSrv.uploadFile(this.img, data).then((res) => {
      res.ref.getDownloadURL()
        .then(ress => {
+        this.spinnerSrv.hide();
          console.log(ress)
          this.img = (ress);
        });
