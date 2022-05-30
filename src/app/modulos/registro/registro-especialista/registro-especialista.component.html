@@ -1,0 +1,142 @@
+<form [formGroup]='formularioEspecialista' (ngSubmit)='aceptarEspecialista()'>
+    <div class="form-group">
+      <input type="text" formControlName='nombre_' class="fadeIn second" placeholder="Nombre"><br>
+      <small class="form-text text-muted"
+        *ngIf="formularioEspecialista.get('nombre_')?.hasError('required') && formularioEspecialista.get('nombre_')?.touched">El
+        Nombre es
+        requerido.</small>
+    </div>
+  
+  
+    <div class="form-group">
+      <input type="text" formControlName='apellido' class="fadeIn second" placeholder="Apellido"><br>
+      <small class="form-text text-muted"
+        *ngIf="formularioEspecialista.get('apellido')?.hasError('required') && formularioEspecialista.get('apellido')?.touched">El
+        apellido es requerido.</small>
+    </div>
+   
+    <div class="form-group">
+      <input type="number" formControlName='edad' class="fadeIn second" placeholder="Edad"><br>
+      <small class="form-text text-muted"
+        *ngIf="formularioEspecialista.get('edad')?.hasError('required') && formularioEspecialista.get('edad')?.touched">La
+        edad es
+        requerida.</small>
+      <small id="edadHelp2" class="form-text text-muted"
+        *ngIf="formularioEspecialista.get('edad')?.hasError('min') && formularioEspecialista.get('edad')?.touched">La
+        edad minima es
+        18.</small>
+      <small id="edadHelp2" class="form-text text-muted"
+        *ngIf="formularioEspecialista.get('edad')?.hasError('max') && formularioEspecialista.get('edad')?.touched">La
+        edad maxima es
+        99.</small>
+    </div>
+  
+  
+    <div class="form-group">
+      <input type="text" formControlName='dni' class="fadeIn second" placeholder="DNI"><br>
+      <small class="form-text text-muted"
+        *ngIf="formularioEspecialista.get('dni')?.hasError('required') && formularioEspecialista.get('dni')?.touched">El
+        dni es requerido.</small>
+
+      <small class="form-text text-muted"
+        *ngIf="formularioEspecialista.get('dni')?.hasError('pattern') && formularioEspecialista.get('dni')?.touched">Solo se admiten numeros.</small>
+
+        <small class="form-text text-muted"
+        *ngIf="formularioEspecialista.get('dni')?.hasError('maxLength') && formularioEspecialista.get('dni')?.touched">Solo se admiten 10 numeros.</small>
+    
+        <small class="form-text text-muted"
+        *ngIf="formularioEspecialista.get('dni')?.hasError('minLength') && formularioEspecialista.get('dni')?.touched">Se deben ingresar 10 numeros.</small>
+  
+      </div>
+  
+  
+    <label>Elegir una opcion: </label>
+    <br>
+    <div *ngFor='let esp of especialidades'>
+      <input formControlName='especialidadCheck' type="checkbox" value=" {{esp.nombre}} " (change)="selEsp($event)">
+      {{esp.nombre}} <br>
+  
+      <small class="form-text text-muted"
+        *ngIf="formularioEspecialista.get('especialidadCheck')?.hasError('vacio') && formularioEspecialista.get('especialidadCheck')?.touched">
+        es requerido.</small>
+  
+    </div>
+  
+    <button type="button" class="btn btn-primary" (click)="mostrarModalEditar()">Crear
+      especialidad</button>
+    <br>
+    <div class="form-group">
+  
+      <input type="email" formControlName='email' class="fadeIn second" placeholder="Email"><br>
+      <small class="form-text text-muted"
+        *ngIf="formularioEspecialista.get('email')?.hasError('required') && formularioEspecialista.get('email')?.touched">El
+        email es
+        requerido.</small>
+
+        <small class="form-text text-muted"
+        *ngIf="formularioEspecialista.get('email')?.hasError('email') && formularioEspecialista.get('email')?.touched">Debe usar un email valido</small>
+    </div>
+  
+    <div class="form-group">
+      <input type="password" formControlName='clave' class="fadeIn third" placeholder="Clave"><br>
+      <small class="form-text text-muted"
+        *ngIf="formularioEspecialista.get('clave')?.hasError('required') && formularioEspecialista.get('clave')?.touched">La
+        clave es
+        requerida.</small>
+        <small class="form-text text-muted"
+        *ngIf="formularioEspecialista.get('clave')?.hasError('minLength') && formularioEspecialista.get('clave')?.touched">La
+        clave  debe tener 6 caracteres</small>
+    </div>
+  
+  
+    <div class="form-group">
+      <input class="file-input" type="file" formControlName="archivo" (change)="cambioArchivo($event)"><br>
+      <br><small class="form-text text-muted"> {{mensajeImagen}} </small>
+      <small class="form-text text-muted"
+        *ngIf="formularioEspecialista.get('archivo')?.hasError('required') && formularioEspecialista.get('archivo')?.touched">El
+        archivo es requerida.</small>
+  
+  
+      <small class="form-text text-muted" *ngIf="formularioEspecialista.get('archivo')?.hasError('imagenCargada') ">
+        es requerido.</small>
+    </div>
+  
+  
+    <button type="submit" class="btn btn-success" [disabled]='formularioEspecialista.invalid'>ENVIAR</button>
+  </form>
+  {{mensaje}}
+  
+  
+  <ng-template #myModalConf let-modal>
+  
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modificar estado actual</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          (click)="modal.close('Cerrado desde la ventana')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]='formulario_Especialidad' (ngSubmit)='aceptarEspecialidad()'>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Especialidad:</label>
+            <input type="text" class="form-control" id="recipient-name" formControlName='nombre'>
+            <br>
+            <small class="form-text text-muted"
+              *ngIf="formulario_Especialidad.get('nombre')?.hasError('required') && formulario_Especialidad.get('nombre')?.touched">El
+              nombre de la especialidad es requerido.</small>
+          </div>
+  
+  
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modal.close('No')">Cancelar</button>
+        <button type="submit" class="btn btn-success" (click)="aceptarEspecialidad()"
+          [disabled]='formulario_Especialidad.invalid'>Guardar</button>
+      </div>
+      {{mensaje}}
+    </div>
+  
+  </ng-template>

@@ -1,0 +1,34 @@
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+      <h2 class="active"> Registro</h2>
+      <br>
+      <label>¿Que tipo de usuario esta por registrar?</label>
+  
+      <select [(ngModel)]="opcionSeleccionado" (change)="capturar()">
+        <option selected value="0">Elegir opcion</option>
+        <option *ngFor="let dato of tipoUsuario" value="{{dato}}">
+          {{dato}}
+        </option>
+      </select>
+  
+      <br>
+      <div *ngIf='paciente!= null || especialista != null || administrador != null'>
+  
+        <div *ngIf='paciente && paciente!= null'>
+          <app-registro-paciente></app-registro-paciente>
+        </div>
+  
+  
+        <div *ngIf='especialista && especialista!=null'> 
+          <app-registro-especialista></app-registro-especialista> 
+        </div>
+  
+  
+        <div *ngIf='administrador && administrador!=null'>
+          <app-registro-administrador></app-registro-administrador>
+        </div>
+   
+     </div>
+    </div>
+  </div>
