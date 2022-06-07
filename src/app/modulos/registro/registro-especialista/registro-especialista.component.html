@@ -102,7 +102,9 @@
       <small class="form-text text-muted" *ngIf="formularioEspecialista.get('archivo')?.hasError('imagenCargada') ">
         es requerido.</small>
     </div>
-  
+    <div  class="form-group">
+      <ng-hcaptcha formControlName="captcha"></ng-hcaptcha>
+    </div>
   
     <button type="submit" class="btn btn-success" [disabled]='formularioEspecialista.invalid'>ENVIAR</button>
   </form>
@@ -130,7 +132,8 @@
               *ngIf="formulario_Especialidad.get('nombre')?.hasError('required') && formulario_Especialidad.get('nombre')?.touched">El
               nombre de la especialidad es requerido.</small>
           </div>
-  
+          
+
   
         </form>
       </div>

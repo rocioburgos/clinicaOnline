@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdministradorLogueadoGuard } from './guards/administrador-logueado.guard';
 import { BienvenidaComponent } from './pages/bienvenida/bienvenida.component';
+import { ValidaremailComponent } from './shared/validaremail/validaremail.component';
 
 const routes: Routes = [
   {path:'bienvenida', component:BienvenidaComponent},
@@ -11,6 +12,10 @@ const routes: Routes = [
     path: 'administracion', 
     loadChildren: () => import('./modulos/administracionusuarios/administracionusuarios.module').then(m => m.AdministracionusuariosModule)
     ,canActivate:[AdministradorLogueadoGuard]
+ },
+ {
+   path:'validaremail',
+   component: ValidaremailComponent
  },
 
 

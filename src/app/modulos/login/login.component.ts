@@ -15,7 +15,7 @@ export class LoginComponent  {
   formulario: FormGroup;
   mensaje: string = ''; 
   usuarios:any[]=[
-    {email:'clinica.adm2021@gmail.com', clave:'123456', imagen:'./../../../assets/usuarios-login/admin.jpg'},
+    {email:'rocioburgos00@gmail.com', clave:'123456', imagen:'./../../../assets/usuarios-login/admin.jpg'},
     {email:'leomessi@gmail.com', clave:'123456', imagen:'./../../../assets/usuarios-login/messi-perfil.jpg'},
     {email:'benito@gmail.com', clave:'123456', imagen:'./../../../assets/usuarios-login/benito-perfil.png'},
     {email:'shakira@gmail.com', clave:'123456', imagen:'./../../../assets/usuarios-login/shakira-perfil.jpg'},
@@ -48,7 +48,7 @@ export class LoginComponent  {
           case 'administrador':
             if(res.user?.emailVerified){
               localStorage.setItem('usuario_clinica', JSON.stringify({ ...user })); 
-              //this.router.navigate(['panelUsuarios']);
+              this.router.navigate(['administracion']);
             }else{
               this.mensaje='Debe verificar su email.';
               console.log(this.mensaje);

@@ -69,7 +69,10 @@
         *ngIf="formulario.get('archivo1')?.hasError('required') && formulario.get('archivo1')?.touched">El
         archivo es requerida.</small>
     </div>
- 
+    
+    <div  class="form-group">
+      <ng-hcaptcha formControlName="captcha"></ng-hcaptcha>
+    </div>
  
     
 

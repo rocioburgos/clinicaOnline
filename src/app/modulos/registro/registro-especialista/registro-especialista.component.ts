@@ -60,7 +60,8 @@ export class RegistroEspecialistaComponent  {
      email: ['', [Validators.required, Validators.email]],
      clave: ['', Validators.required, Validators.minLength(6)],
      archivo: [null, [Validators.required]],
-     especialidadCheck: [null, this.validarEspecialidad] 
+     especialidadCheck: [null, this.validarEspecialidad],
+     captcha:[ null, [Validators.required]]
    });
 
    this.formulario_Especialidad = fb.group({
@@ -108,7 +109,7 @@ export class RegistroEspecialistaComponent  {
        this.usuariosSrv.setItemWithId(datos, credential.user.uid)
          .then(() => {
           this.spinnerSrv.hide();
-           this.router.navigate(['activarUsuario'])
+           this.router.navigate(['validaremail'])
           });
      });
    } catch (error) {

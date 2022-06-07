@@ -7,6 +7,7 @@ import { FilesService } from 'src/app/servicios/files/files.service';
 import { SpinnerService } from 'src/app/servicios/spinner/spinner.service';
 import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
 import { SpinnerComponent } from 'src/app/shared/spinner/spinner.component';
+ 
 @Component({
   selector: 'app-registro-paciente',
   templateUrl: './registro-paciente.component.html',
@@ -26,7 +27,7 @@ export class RegistroPacienteComponent implements OnInit {
   img1 = ''; 
   img2= ''; 
   image: any;
-  captcha: string;      // empty = not yet proven to be a human, anything else = human
+ 
 
 
   constructor(private fb: FormBuilder,
@@ -36,7 +37,7 @@ export class RegistroPacienteComponent implements OnInit {
     private fileSrv: FilesService,
     private spinnerSrv: SpinnerService) {
     this.paciente = null;
-    this.captcha = '';
+  
     this.formulario = fb.group({
       nombre: ['', [Validators.required]],
       apellido: ['', [Validators.required]],
@@ -46,17 +47,15 @@ export class RegistroPacienteComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       clave: ['', Validators.required],
       archivo1: [null, [Validators.required]],
-      archivo2: [null, [Validators.required]]
+      archivo2: [null, [Validators.required]],
+      captcha:[ null, [Validators.required]]
     });
   }
 
   ngOnInit(): void {
   }
 
-  resolved(captchaResponse: string) {
-    this.captcha = captchaResponse;
-    console.log('resolved captcha with response: ' + this.captcha);
-  }
+ 
 
 
   async aceptarPaciente() {
@@ -81,7 +80,7 @@ export class RegistroPacienteComponent implements OnInit {
         this.usuariosSrv.setItemWithId(datos, credential.user.uid)
           .then(() => {
             this.spinnerSrv.hide();
-            this.router.navigate(['activarUsuario'])
+            this.router.navigate(['validaremail'])
           });;
       });
     } catch (error) {

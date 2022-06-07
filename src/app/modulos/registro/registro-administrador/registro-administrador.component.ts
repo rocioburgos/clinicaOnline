@@ -21,8 +21,7 @@ export class RegistroAdministradorComponent implements OnInit {
   image: any;
   public mensajeArchivo = 'No hay un archivo seleccionado';
   public nombreArchivo = '';
-  img = '';
-  captcha: string;      // empty = not yet proven to be a human, anything else = human
+  img = ''; 
 
 
   constructor(private fb: FormBuilder,
@@ -32,7 +31,7 @@ export class RegistroAdministradorComponent implements OnInit {
     private fileSrv: FilesService,
     private spinnerSrv: SpinnerService) {
     this.paciente = null;
-    this.captcha = '';
+   
     this.formulario = fb.group({
       nombre: ['', [Validators.required]],
       apellido: ['', [Validators.required]],
@@ -41,7 +40,8 @@ export class RegistroAdministradorComponent implements OnInit {
 
       email: ['', [Validators.required, Validators.email]],
       clave: ['', Validators.required],
-      archivo1: [null, Validators.required] 
+      archivo1: [null, Validators.required],
+      captcha:[ null, [Validators.required]]
      
     });
   }
@@ -72,7 +72,7 @@ export class RegistroAdministradorComponent implements OnInit {
         this.usuariosSrv.setItemWithId(datos, credential.user.uid)
           .then(() => {
             this.spinnerSrv.hide();
-            this.router.navigate(['activarUsuario'])
+            this.router.navigate(['validaremail'])
           }
           );;
       });

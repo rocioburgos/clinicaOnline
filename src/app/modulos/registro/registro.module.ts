@@ -9,6 +9,7 @@ import { RegistroPacienteComponent } from './registro-paciente/registro-paciente
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SpinnerModule } from 'src/app/shared/spinner/spinner.module'; 
+import { NgHcaptchaModule } from 'ng-hcaptcha';
 
 @NgModule({
   declarations: [ 
@@ -23,8 +24,12 @@ import { SpinnerModule } from 'src/app/shared/spinner/spinner.module';
     FormsModule,
     ReactiveFormsModule ,
     
-    NgbModule  //PARA LOS USAR LOS MODALES DE BOOTSTRAP
-    ,SpinnerModule
+    NgbModule,  //PARA LOS USAR LOS MODALES DE BOOTSTRAP
+     SpinnerModule,
+    NgHcaptchaModule.forRoot({
+      siteKey: '68328e4e-6b10-4bb6-a397-7149ba4eb852',
+      languageCode: 'es' // optional, will default to browser language
+  }),
   ],
   providers: [ ],
 })

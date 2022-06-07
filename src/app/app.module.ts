@@ -13,13 +13,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BienvenidaComponent } from './pages/bienvenida/bienvenida.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; 
-import { SpinnerModule } from './shared/spinner/spinner.module'; 
+import { SpinnerModule } from './shared/spinner/spinner.module';
+import { ValidaremailComponent } from './shared/validaremail/validaremail.component'; 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    BienvenidaComponent
+    BienvenidaComponent,
+    ValidaremailComponent
   ],
   imports: [
     BrowserModule,
