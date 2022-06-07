@@ -39,5 +39,5 @@ Debe elegir que tipo de usuario quiere registrar
  Segun cual elija debera completar distintos datos, todos son obligatorios 
 [![registro2](https://firebasestorage.googleapis.com/v0/b/tpclinica-282c4.appspot.com/o/imagenes-readme%2Fregistro2.png?alt=media&token=d52ff09d-9bcc-4f40-b395-fa6ed9f8881f "registro2")](https://firebasestorage.googleapis.com/v0/b/tpclinica-282c4.appspot.com/o/imagenes-readme%2Fregistro2.png?alt=media&token=d52ff09d-9bcc-4f40-b395-fa6ed9f8881f "registro2")
 
-## Login✅
- [![Login]([https://firebasestorage.googleapis.com/v0/b/tpclinica-282c4.appspot.com/o/imagenes-readme%2FCaptura%20de%20pantalla%202021-11-03%20133837.png?alt=media&token=48b8dace-418d-446d-b0fe-1d93600dae28 "Login")](https://firebasestorage.googleapis.com/v0/b/clinicaonline2022-f5a8c.appspot.com/o/githubReadme%2Flogin.png?alt=media&token=3cb8373e-d39a-43c1-bc64-ec060d79c25e)](https://firebasestorage.googleapis.com/v0/b/tpclinica-282c4.appspot.com/o/imagenes-readme%2FCaptura%20de%20pantalla%202021-11-03%20133837.png?alt=media&token=48b8dace-418d-446d-b0fe-1d93600dae28 "Login")
+# Login✅#
+[ githubReadme/login.png (1424×768)](https://firebasestorage.googleapis.com/v0/b/clinicaonline2022-f5a8c.appspot.com/o/githubReadme%2Flogin.png?alt=media&token=3cb8373e-d39a-43c1-bc64-ec060d79c25e)
