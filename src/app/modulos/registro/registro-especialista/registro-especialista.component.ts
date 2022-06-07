@@ -109,7 +109,7 @@ export class RegistroEspecialistaComponent  {
          .then(() => {
           this.spinnerSrv.hide();
            this.router.navigate(['activarUsuario'])
-          });;
+          });
      });
    } catch (error) {
      console.log(error);

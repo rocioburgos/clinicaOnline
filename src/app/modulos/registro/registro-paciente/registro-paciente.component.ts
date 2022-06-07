@@ -19,14 +19,16 @@ export class RegistroPacienteComponent implements OnInit {
   formulario: FormGroup;
   completarForm = true;
   mensajeImagen: string = '';
-  img1 = '';
-  img2 = '';
+ 
   public mensajeArchivo = 'No hay un archivo seleccionado';
 
   public nombreArchivo = '';
-  img = '';
-
+  img1 = ''; 
+  img2= ''; 
+  image: any;
   captcha: string;      // empty = not yet proven to be a human, anything else = human
+
+
   constructor(private fb: FormBuilder,
     private authSrv: AuthService,
     private usuariosSrv: UsuarioService,
@@ -43,9 +45,8 @@ export class RegistroPacienteComponent implements OnInit {
       obraSocial: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       clave: ['', Validators.required],
-      archivo1: [null, Validators.required],
-      archivo2: [null, Validators.required],
-      c: ['', Validators.required]
+      archivo1: [null, [Validators.required]],
+      archivo2: [null, [Validators.required]]
     });
   }
 
@@ -70,8 +71,8 @@ export class RegistroPacienteComponent implements OnInit {
       email: form.email,
       obraSocial: form.obraSocial,
       clave: form.clave,
-      archivo2: this.img1,
-      archivo1: this.img2,
+      archivo1: this.img1,
+      archivo2: this.img2,
       perfil: 'paciente'
     }
 
@@ -92,37 +93,50 @@ export class RegistroPacienteComponent implements OnInit {
 
   }
 
-  getFilePath() {
-    return new Date().getTime() + '-paciente';
-  }
+ //Evento que se gatilla cuando el input de tipo archivo cambia
+ public cambioArchivo(event: any, num:number) {
+  this.image = event.target.files[0];
+  this.subirArchivo(this.image, num);
+}
 
-
-  //Evento que se gatilla cuando el input de tipo archivo cambia
-  public cambioArchivo1(event: any) {
-    this.spinnerSrv.show();
-    this.img1 = this.getFilePath();
-    let task = this.fileSrv.uploadFile(this.img1, event.target.files[0]).then((res) => {
-      res.ref.getDownloadURL()
-        .then(ress => {
-          this.spinnerSrv.hide();
+//Sube el archivo a Cloud Storage
+async subirArchivo(data: any, num:number) {
+ this.spinnerSrv.show();
+ if(num==1){
+  this.img1 = this.getFilePath()
+  let task = this.fileSrv.uploadFile(this.img1, data).then((res) => {
+    res.ref.getDownloadURL()
+      .then(ress => {
+       this.spinnerSrv.hide();
+        console.log(ress)
+        
           this.img1 = (ress);
-        });
-    });
-  }
-
-
-  //Evento que se gatilla cuando el input de tipo archivo cambia
-  public cambioArchivo2(event: any) {
-    this.spinnerSrv.show();
-    this.img2 = this.getFilePath();
-    let task = this.fileSrv.uploadFile(this.img2, event.target.files[0]).then((res) => {
-      res.ref.getDownloadURL()
-        .then(ress => {
-          this.spinnerSrv.hide();
+       
+       
+      });
+  });
+ }else{
+  this.img2 = this.getFilePath()
+  let task = this.fileSrv.uploadFile(this.img2, data).then((res) => {
+    res.ref.getDownloadURL()
+      .then(ress => {
+       this.spinnerSrv.hide();
+        console.log(ress)
+     
           this.img2 = (ress);
-        });
-    });
+      
+       
+      });
+  });
+ }
+ 
+}
 
-  }
+getFilePath() {
+  return new Date().getTime() + '-paciente';
+}
+
+
+ 
 
 }

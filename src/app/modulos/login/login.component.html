@@ -1,45 +1,46 @@
 <div class="wrapper fadeInDown">
-  
-    <div id="formContent">
-      <!-- Tabs Titles -->
-      <h2 class="active"> Ingreso</h2>
-   <app-spinner></app-spinner>
-      <!-- Icon -->
-      <div class="fadeIn first">
-        <img src="./../../../assets/user.png" id="icon" alt="User Icon" />
-      </div>
-      <div>
-        <!-- Login Form -->
-        <form  [formGroup]='formulario' (ngSubmit)='login()' >
-          
-         <div class="form-group">
+
+  <div id="formContent">
+    <!-- Tabs Titles -->
+    <h2 class="active"> Ingreso</h2>
+    <app-spinner></app-spinner>
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img src="./../../../assets/user.png" id="icon" alt="User Icon" />
+    </div>
+    <div>
+      <!-- Login Form -->
+      <form [formGroup]='formulario' (ngSubmit)='login()'>
+
+        <div class="form-group">
           <input type="email" class="fadeIn second" formControlName='email' placeholder="Email"><br>
           <small class="form-text text-muted"
-          *ngIf="formulario.get('email')?.hasError('required') && formulario.get('email')?.touched">El email es
-          requerido.</small>
+            *ngIf="formulario.get('email')?.hasError('required') && formulario.get('email')?.touched">El email es
+            requerido.</small>
         </div>
-        <div class="form-group"> 
-          <input type="password"  class="fadeIn third" formControlName='clave' placeholder="Clave"><br>
+        <div class="form-group">
+          <input type="password" class="fadeIn third" formControlName='clave' placeholder="Clave"><br>
           <small class="form-text text-muted"
-          *ngIf="formulario.get('clave')?.hasError('required') && formulario.get('clave')?.touched">La clave es
-          requerido.</small>
+            *ngIf="formulario.get('clave')?.hasError('required') && formulario.get('clave')?.touched">La clave es
+            requerido.</small>
         </div>
-          <input type="submit" class="fadeIn fourth" value="Ingresar" [disabled]='formulario.invalid'>
-        </form>
-        <p> {{mensaje}} </p>
-      </div>
-      
-      <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
-        <button class="btn btn-outline-primary" for="btnradio1" (click)='completar("especialista")'>Especialista</button>
-      
-        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-        <label class="btn btn-outline-primary" for="btnradio2" (click)='completar("paciente")'>Paciente</label>
-      
-        <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
-        <label class="btn btn-outline-primary" for="btnradio3" (click)='completar("administrador")'>Administrador</label>
-      </div>
-      <br>
-      <label for=""> </label>
+        <input type="submit" class="fadeIn fourth" value="Ingresar" [disabled]='formulario.invalid'>
+      </form>
+      <p> {{mensaje}} </p>
     </div>
+
+
+    <div class="btn-group " role="group" aria-label="Basic checkbox toggle button group">
+      <div *ngFor="let user of usuarios">
+
+        <button class="btn sprite" (click)='completar( user )'>
+          <img src="{{user.imagen}} " class="img-redonda" width="50px">
+        </button>
+
+      </div>
+    </div>
+
+    <br>
+    <label for=""> </label>
   </div>
+</div>

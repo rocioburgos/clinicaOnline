@@ -41,18 +41,15 @@ export class RegistroAdministradorComponent implements OnInit {
 
       email: ['', [Validators.required, Validators.email]],
       clave: ['', Validators.required],
-      archivo1: [null, Validators.required],
-      c: ['', Validators.required]
+      archivo1: [null, Validators.required] 
+     
     });
   }
 
   ngOnInit(): void {
   }
 
-  resolved(captchaResponse: string) {
-    this.captcha = captchaResponse;
-    console.log('resolved captcha with response: ' + this.captcha);
-  }
+  
 
   async aceptarAdministrador() {
     this.spinnerSrv.show();

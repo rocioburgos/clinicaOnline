@@ -7,14 +7,13 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from 'src/environments/environment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
- import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+ import {HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BienvenidaComponent } from './pages/bienvenida/bienvenida.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; 
-import { SpinnerModule } from './shared/spinner/spinner.module';
-import { SpinnerInterceptor } from './shared/spinner/interceptors/spinner.interceptos';
+import { SpinnerModule } from './shared/spinner/spinner.module'; 
 
 
 @NgModule({
@@ -37,7 +36,7 @@ import { SpinnerInterceptor } from './shared/spinner/interceptors/spinner.interc
 
  
   ],
-   providers: [{provide:  HTTP_INTERCEPTORS, useClass:SpinnerInterceptor, multi:true}],
+   providers: [ ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

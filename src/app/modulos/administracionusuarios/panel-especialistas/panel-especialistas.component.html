@@ -1,0 +1,58 @@
+<div class="container">
+  <h2><a href="administracion/principal"> Panel Administrador</a></h2>
+  <table class="table table-primary table-striped">
+    <thead>
+      <tr>
+        <th>Imagen</th>
+        <th>Usuario</th>
+        <th>Nombre</th>
+        <th>Estado</th>
+        <th>Edad</th>
+        <th>Especialidades</th>
+        <th>Perfil</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let item of especialistas'>
+        <td> <img src="{{item.archivo}} " width="50px"></td>
+        <td>{{item.email}}</td>
+        <td>{{item.nombre}} {{item.apellido}}</td>
+        <td>{{item.estado}}</td>
+        <td>{{item.edad}}</td>
+        <td>
+          <ol>
+            <li *ngFor='let e of item.espe'>{{e}}</li>
+          </ol>
+        </td>
+        <td> {{item.perfil}} </td>
+        <td>
+
+          <div *ngIf="item.estado== 'pendiente'">
+            <button type="button" class="btn btn-success" (click)="actualizarEstado(item.uid, 'habilidato')">
+              Aceptar
+            </button>
+            <button type="button" class="btn btn-danger" (click)="actualizarEstado(item.uid, 'deshabilidato')">
+              Rechazar
+            </button>
+          </div>
+
+          <div *ngIf="item.estado== 'deshabilidato'">
+            <button type="button" class="btn btn-success" (click)="actualizarEstado(item.uid, 'habilidato')">
+              Habilitar
+            </button>
+          </div>
+          <div *ngIf="item.estado== 'habilidato'">
+
+            <button type="button" class="btn btn-danger" (click)="actualizarEstado(item.uid, 'deshabilidato')">
+              Dar de baja
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+</div>

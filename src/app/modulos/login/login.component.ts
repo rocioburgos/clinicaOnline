@@ -13,7 +13,15 @@ import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
 export class LoginComponent  {
 
   formulario: FormGroup;
-  mensaje: string = '';
+  mensaje: string = ''; 
+  usuarios:any[]=[
+    {email:'clinica.adm2021@gmail.com', clave:'123456', imagen:'./../../../assets/usuarios-login/admin.jpg'},
+    {email:'leomessi@gmail.com', clave:'123456', imagen:'./../../../assets/usuarios-login/messi-perfil.jpg'},
+    {email:'benito@gmail.com', clave:'123456', imagen:'./../../../assets/usuarios-login/benito-perfil.png'},
+    {email:'shakira@gmail.com', clave:'123456', imagen:'./../../../assets/usuarios-login/shakira-perfil.jpg'},
+    {email:'derek@gmail.com', clave:'123456', imagen:'./../../../assets/usuarios-login/neurologo.jpg'},
+    {email:'miranda@gmail.com', clave:'123456', imagen:'./../../../assets/usuarios-login/general.jpg'}
+  ]
   constructor(private fb: FormBuilder, private authSrv: AuthService, private router: Router,
     private usrSrv: UsuarioService, private spinnerSrv:SpinnerService) {
     this.formulario = fb.group({
@@ -34,43 +42,55 @@ export class LoginComponent  {
     try {
       await this.authSrv.loginUser(datos.email, datos.clave).then(async (res) => { 
         const user = (await this.usrSrv.getUserByUid('' + res?.user?.uid).toPromise()).data(); 
-        
+        console.log(res.user?.uid);
 
-        if (res.user?.emailVerified && user.perfil == 'administrador') {
-          localStorage.setItem('usuario_clinica', JSON.stringify({ ...user })); 
-          this.router.navigate(['panelUsuarios']);
-        } else if (res.user?.emailVerified && user.perfil == 'especialista') {
-          if (user.estado == 'aceptado') {
-            localStorage.setItem('usuario_clinica', JSON.stringify({ ...user })); 
-            this.router.navigate(['']);
-          } else {
-            console.log("querido especialista todavia no fue aceptado.");
-            this.mensaje= 'querido especialista todavia no fue aceptado.';
-          }
-        } else if (res.user?.emailVerified && user.perfil == 'paciente') {
-          localStorage.setItem('usuario_clinica', JSON.stringify({ ...user })); 
-          this.router.navigate(['']);
-        } else if (!res.user?.emailVerified) {
-          this.router.navigate(['activarUsuario']);
-        } else {
-          this.router.navigate(['registro']);
+        switch ( user.perfil) {
+          case 'administrador':
+            if(res.user?.emailVerified){
+              localStorage.setItem('usuario_clinica', JSON.stringify({ ...user })); 
+              //this.router.navigate(['panelUsuarios']);
+            }else{
+              this.mensaje='Debe verificar su email.';
+              console.log(this.mensaje);
+            }
+            break;
+          case 'especialista':
+             if(res.user?.emailVerified){
+              if (user.estado == 'aceptado') {
+                localStorage.setItem('usuario_clinica', JSON.stringify({ ...user })); 
+                 this.router.navigate(['']);
+    
+              } else {
+                this.mensaje= 'querido especialista todavia no fue aceptado.';
+              }
+             }else {
+              this.mensaje='Debe verificar su email.';
+             }
+          break;
+             case 'paciente':
+              if(res.user?.emailVerified){
+                localStorage.setItem('usuario_clinica', JSON.stringify({ ...user })); 
+                this.router.navigate(['']);
+              }else{
+                this.mensaje='Debe verificar su email.';
+              }
+             break;
+          default:
+            break;
         }
+
       }); 
-    } catch (err) {
-      console.log(err);
+    } catch (error) { 
+      this.mensaje='Compruebe los datos ingresados';
+      console.log(error);
     }finally{
       this.spinnerSrv.hide();
     }
   }
 
 
-  completar(perfil: string) {
-    if (perfil == 'especialista') {
-      this.formulario.setValue({ 'email': 'rocioburgos00@gmail.com', 'clave': '123456' })
-    } else if (perfil == 'administrador') {
-      this.formulario.setValue({ 'email': 'clinica.adm2021@gmail.com', 'clave': '123456' })
-    } else if (perfil == 'paciente') { 
-      this.formulario.setValue({ 'email': 'juanperez.pac2021@gmail.com', 'clave': '123456' })
-    }
+  completar(perfil: any) {
+    this.formulario.setValue({'email':perfil.email , 'clave': perfil.clave})
+  
   } 
 }

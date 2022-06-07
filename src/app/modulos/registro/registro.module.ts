@@ -8,9 +8,7 @@ import { RegistroEspecialistaComponent } from './registro-especialista/registro-
 import { RegistroPacienteComponent } from './registro-paciente/registro-paciente.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SpinnerModule } from 'src/app/shared/spinner/spinner.module';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { SpinnerInterceptor } from 'src/app/shared/spinner/interceptors/spinner.interceptos';
+import { SpinnerModule } from 'src/app/shared/spinner/spinner.module'; 
 
 @NgModule({
   declarations: [ 
@@ -28,6 +26,6 @@ import { SpinnerInterceptor } from 'src/app/shared/spinner/interceptors/spinner.
     NgbModule  //PARA LOS USAR LOS MODALES DE BOOTSTRAP
     ,SpinnerModule
   ],
-  providers: [{provide:  HTTP_INTERCEPTORS, useClass:SpinnerInterceptor, multi:true}],
+  providers: [ ],
 })
 export class RegistroModule { }

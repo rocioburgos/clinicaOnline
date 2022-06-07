@@ -4,13 +4,20 @@
       <h2 class="active"> Registro</h2>
       <br>
       <label>¿Que tipo de usuario esta por registrar?</label>
-  
-      <select [(ngModel)]="opcionSeleccionado" (change)="capturar()">
-        <option selected value="0">Elegir opcion</option>
-        <option *ngFor="let dato of tipoUsuario" value="{{dato}}">
-          {{dato}}
-        </option>
-      </select>
+      
+      
+      <div>
+      <button class="btn sprite"  (click)='capturar("especialista")'>
+        <img src="./../../../../assets/registro-opciones-usuarios/especialista.png" class="img-redonda" width="150px">  
+      </button>
+      <button class="btn sprite"  (click)='capturar("paciente")'>
+        <img src="./../../../../assets/registro-opciones-usuarios/paciente.png" class="img-redonda" width="150px">  
+      </button>
+      <button *ngIf="pefil_actual=='administrador'" class="btn sprite"  (click)='capturar("admin")'>
+        <img src="./../../../../assets/registro-opciones-usuarios/administrador-sistemas.jpg" class="img-redonda" width="150px">  
+      </button>
+    </div>
+ 
   
       <br>
       <div *ngIf='paciente!= null || especialista != null || administrador != null'>

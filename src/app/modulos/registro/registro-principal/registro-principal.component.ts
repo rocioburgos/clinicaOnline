@@ -10,30 +10,19 @@ export class RegistroPrincipalComponent implements OnInit {
  //para el modal de crear especialidad
  @ViewChild("myModalConf", { static: false }) myModalConf?: TemplateRef<any>;
 
- paciente: any;
- especialista:any;
- administrador:any;
- tipoUsuario:Array<string> = [];
+ paciente: boolean=false;
+ especialista:boolean=false;
+ administrador:boolean=false;
+ pefil_actual:string='';
 
- // Seleccionamos o iniciamos el valor '0' del <select>
- opcionSeleccionado: string = '0';
+ 
  verSeleccion: string = '';
 
 
 
- constructor(private _render:Renderer2) {
-   this.paciente = null;
-   this.especialista = null;
-   this.administrador = null;
+ constructor(private _render:Renderer2) { 
      let x: any = JSON.parse(localStorage.getItem('usuario_clinica') || '{}');
-     if(x.perfil =='administrador'){
-       this.tipoUsuario =['Especialista', 'Paciente', 'Administrador'];
-     }else{
-       this.tipoUsuario = ['Especialista', 'Paciente'];
-     }
-
-
-   
+     this.pefil_actual= x.perfil;
  }
 
  ngOnInit(): void {
@@ -45,21 +34,34 @@ export class RegistroPrincipalComponent implements OnInit {
  }
 
 
- capturar() {
+ capturar(tipo:string) {
    // Pasamos el valor seleccionado a la variable verSeleccion
-   this.verSeleccion = this.opcionSeleccionado;
-   if (this.verSeleccion == 'Paciente') {
-     this.paciente = true;
-     this.especialista = false;
-     this.administrador = false;
-   } else if(this.verSeleccion == 'Especialista') {
-     this.especialista = true;
-     this.paciente = false;
-     this.administrador = false;
-   }else{
-     this.administrador= true;
-     this.especialista = false;
-     this.paciente = false;
+
+
+   switch (tipo) {
+
+     case "paciente":
+      this.paciente = true;
+      this.especialista = false;
+      this.administrador = false;
+       break;
+       case "especialista":
+        this.especialista = true;
+        this.paciente = false;
+        this.administrador = false;
+       break;
+       case "admin":
+        this.administrador= true;
+        this.especialista = false;
+        this.paciente = false;
+       break;
+       
+     default:
+      this.administrador= false;
+      this.especialista = false;
+      this.paciente = false;
+       break;
    }
+ 
  }
 }

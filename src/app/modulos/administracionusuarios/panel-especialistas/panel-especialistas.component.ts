@@ -1,0 +1,43 @@
+import { Component, TemplateRef, ViewChild   } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
+
+@Component({
+  selector: 'app-panel-especialistas',
+  templateUrl: './panel-especialistas.component.html',
+  styleUrls: ['./panel-especialistas.component.css']
+})
+export class PanelEspecialistasComponent   {
+
+  especialistas:Array<any>=[]; 
+ 
+ //para el modal de crear especialidad
+ @ViewChild("myModalConf", { static: false }) myModalConf?: TemplateRef<any>;
+ nuevoEstado:any;
+  constructor(  private espSrv: UsuarioService, private usrSrv:UsuarioService,private modalService: NgbModal ) {
+    this.espSrv.traerUsuarios().subscribe((data) => {
+      this.especialistas = data;
+      console.log(this.especialistas);
+    });
+  } 
+
+
+  actualizarEstado(id:string, estado:string){ 
+
+    this.usrSrv.actualizarEstado(id, estado);
+  }
+
+  mostrarModalEditar( uid:string,  estado:string  ) {
+     
+    this.modalService.open(this.myModalConf).result.then(r => {
+      console.log("Tu respuesta ha sido: " + r);
+    }, error => {
+      console.log(error);
+    });
+  }
+ 
+
+  guardarCambios(){
+    console.log(this.nuevoEstado)
+  }
+}

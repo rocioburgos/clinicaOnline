@@ -1,3 +1,4 @@
+<h3>Registro paciente</h3>
 <form [formGroup]='formulario' (ngSubmit)='aceptarPaciente()'>
   <app-spinner></app-spinner>
     <div class="form-group">
@@ -69,22 +70,28 @@
 
 
     <div class="form-group">
-      <input class="file-input" type="file" formControlName="archivo1" (change)="cambioArchivo1($event)">
-      <br>     <small class="form-text text-muted"> {{mensajeImagen}} </small>
+      <input class="file-input" type="file" formControlName="archivo1" (change)="cambioArchivo($event, 1)"><br>
+      <br><small class="form-text text-muted"> {{mensajeImagen}} </small>
       <small class="form-text text-muted"
         *ngIf="formulario.get('archivo1')?.hasError('required') && formulario.get('archivo1')?.touched">El
         archivo es requerida.</small>
+  
+  
+      <small class="form-text text-muted" *ngIf="formulario.get('archivo1')?.hasError('imagenCargada') ">
+        es requerido.</small>
     </div>
-
+ 
     <div class="form-group">
-      <input class="file-input" type="file" formControlName="archivo2" (change)="cambioArchivo2($event)">
-      <br>
-       <small class="form-text text-muted"> {{mensajeImagen}} </small>
+      <input class="file-input" type="file" formControlName="archivo2" (change)="cambioArchivo($event, 2)"><br>
+      <br><small class="form-text text-muted"> {{mensajeImagen}} </small>
       <small class="form-text text-muted"
         *ngIf="formulario.get('archivo2')?.hasError('required') && formulario.get('archivo2')?.touched">El
         archivo es requerida.</small>
+  
+  
+      <small class="form-text text-muted" *ngIf="formulario.get('archivo2')?.hasError('imagenCargada') ">
+        es requerido.</small>
     </div>
-
  
     <button type="submit" class="btn btn-success" [disabled]='formulario.invalid'>ENVIAR</button>
   </form>

@@ -265,3 +265,7 @@ input[type=text], input[type=number], input[type=email], input[type=password],in
 * {
   box-sizing: border-box;
 }
+
+.img-redonda{
+  border-radius:50%; 
+}
