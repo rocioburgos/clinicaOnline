@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdministradorLogueadoGuard } from './guards/administrador-logueado.guard';
+import { EspecialistalogueadoGuard } from './guards/especialistalogueado.guard';
+import { UsuarioIngresadoGuard } from './guards/usuario-ingresado.guard';
 import { BienvenidaComponent } from './pages/bienvenida/bienvenida.component';
+import { CargarhorariosComponent } from './shared/cargarhorarios/cargarhorarios.component';
+import { MiperfilComponent } from './shared/miperfil/miperfil.component';
 import { ValidaremailComponent } from './shared/validaremail/validaremail.component';
 
 const routes: Routes = [
@@ -17,8 +21,16 @@ const routes: Routes = [
    path:'validaremail',
    component: ValidaremailComponent
  },
-
-
+ {
+  path:'miperfil',
+  component: MiperfilComponent,
+  canActivate:[UsuarioIngresadoGuard]
+  },
+  {
+    path:'cargarHorarios',
+    component: CargarhorariosComponent,
+    canActivate:[EspecialistalogueadoGuard]
+  },
   {
     path:'',
     redirectTo: 'bienvenida',

@@ -16,11 +16,11 @@ export class LoginComponent  {
   mensaje: string = ''; 
   usuarios:any[]=[
     {email:'rocioburgos00@gmail.com', clave:'123456', imagen:'./../../../assets/usuarios-login/admin.jpg'},
-    {email:'leomessi@gmail.com', clave:'123456', imagen:'./../../../assets/usuarios-login/messi-perfil.jpg'},
-    {email:'benito@gmail.com', clave:'123456', imagen:'./../../../assets/usuarios-login/benito-perfil.png'},
-    {email:'shakira@gmail.com', clave:'123456', imagen:'./../../../assets/usuarios-login/shakira-perfil.jpg'},
-    {email:'derek@gmail.com', clave:'123456', imagen:'./../../../assets/usuarios-login/neurologo.jpg'},
-    {email:'miranda@gmail.com', clave:'123456', imagen:'./../../../assets/usuarios-login/general.jpg'}
+    {email:'cevifi4880@nzaif.com', clave:'123456', imagen:'./../../../assets/usuarios-login/messi-perfil.jpg'},
+    {email:'kafil33990@krunsea.com', clave:'123456', imagen:'./../../../assets/usuarios-login/benito-perfil.png'},
+    {email:'simox56040@nzaif.com', clave:'123456', imagen:'./../../../assets/usuarios-login/shakira-perfil.jpg'},
+    {email:'popadep950@krunsea.com', clave:'123456', imagen:'./../../../assets/usuarios-login/neurologo.jpg'},
+    {email:'wetor99710@nzaif.com', clave:'123456', imagen:'./../../../assets/usuarios-login/general.jpg'}
   ]
   constructor(private fb: FormBuilder, private authSrv: AuthService, private router: Router,
     private usrSrv: UsuarioService, private spinnerSrv:SpinnerService) {
@@ -56,12 +56,12 @@ export class LoginComponent  {
             break;
           case 'especialista':
              if(res.user?.emailVerified){
-              if (user.estado == 'aceptado') {
+              if (user.estado == 'habilidato') {
                 localStorage.setItem('usuario_clinica', JSON.stringify({ ...user })); 
                  this.router.navigate(['']);
     
               } else {
-                this.mensaje= 'querido especialista todavia no fue aceptado.';
+                this.mensaje= 'querido especialista todavia no fue habilidato.';
               }
              }else {
               this.mensaje='Debe verificar su email.';

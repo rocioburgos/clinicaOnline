@@ -62,7 +62,7 @@ export class RegistroAdministradorComponent implements OnInit {
       dni: form.dni,
       email: form.email,
       clave: form.clave,
-      archivo1: this.img,
+      archivo: this.img,
       perfil: 'administrador'
 
     }

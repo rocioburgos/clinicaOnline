@@ -40,4 +40,4 @@ Debe elegir que tipo de usuario quiere registrar
 [![registro2](https://firebasestorage.googleapis.com/v0/b/tpclinica-282c4.appspot.com/o/imagenes-readme%2Fregistro2.png?alt=media&token=d52ff09d-9bcc-4f40-b395-fa6ed9f8881f "registro2")](https://firebasestorage.googleapis.com/v0/b/tpclinica-282c4.appspot.com/o/imagenes-readme%2Fregistro2.png?alt=media&token=d52ff09d-9bcc-4f40-b395-fa6ed9f8881f "registro2")
 
 ## Login✅
- [![Login](https://firebasestorage.googleapis.com/v0/b/tpclinica-282c4.appspot.com/o/imagenes-readme%2FCaptura%20de%20pantalla%202021-11-03%20133837.png?alt=media&token=48b8dace-418d-446d-b0fe-1d93600dae28 "Login")](https://firebasestorage.googleapis.com/v0/b/tpclinica-282c4.appspot.com/o/imagenes-readme%2FCaptura%20de%20pantalla%202021-11-03%20133837.png?alt=media&token=48b8dace-418d-446d-b0fe-1d93600dae28 "Login")
+![Graficos](src\assets\readme\login.png "Login")

@@ -1,0 +1,83 @@
+<div class="row animate__animated animate__bounceInRight">
+    <div class="col-md-8 mx-auto mt-5">
+        <div class="card">
+            <div class="card-body FormularioPaciente">
+                <h1 class="text-center mb-3"><b>Perfil</b></h1>
+                <div class="row" *ngIf="usuario != null">
+
+                    <div class="col-md-6 mx-auto mt-2 text-center" *ngIf="usuario.perfil == 'paciente'">
+
+                        <img src="{{usuario.archivo1}}" class="tamanio" alt="foto 1 del usuario">
+                    </div>
+                    <div class="col-md-6 mx-auto mt-2 text-center" *ngIf="usuario.perfil == 'paciente'">
+
+                        <img src="{{usuario.archivo2}}" class="tamanio" alt="foto 2 del usuario">
+                    </div>
+                    <div class="col-md-12 mx-auto mt-2 text-center" *ngIf="usuario.perfil != 'paciente'">
+
+                        <img src="{{usuario.archivo}}" class="tamanio" alt="foto 1 del usuario">
+                    </div>
+
+
+                    <div class="col-md-6 mx-auto mt-2 text-center">
+                        <h4>Nombre: {{usuario.nombre}}</h4>
+                    </div>
+                    <div class="col-md-6 mx-auto mt-2 text-center">
+                        <h4>Apellido: {{usuario.apellido}}</h4>
+                    </div>
+                    <div class="col-md-6 mx-auto mt-2 text-center">
+                        <h4>Edad: {{usuario.edad}}</h4>
+                    </div>
+                    <div class="col-md-6 mx-auto mt-2 text-center">
+                        <h4>DNI: {{usuario.dni}}</h4>
+                    </div>
+                    <div class="col-md-6 mx-auto mt-2 text-center">
+                        <h4>Email: {{usuario.email}}</h4>
+                    </div>
+                    <div class="col-md-6 mx-auto mt-2 text-center">
+                        <h4>Tipo de usuario: {{usuario.perfil}}</h4>
+                        <div class="col-md-6 mx-auto mt-2 text-center">
+                            <h4 *ngIf="usuario.perfil=='especialista'">Especialidades:</h4>
+                            <h5 *ngFor="let espe of usuario.espe"> {{espe}}</h5>
+                        </div>
+                    </div>
+
+
+                    <div *ngIf="usuario.perfil=='especialista'">
+
+                        <div *ngIf="tieneHorarios">
+                            <h4><b>Mis horarios de atención al publico</b></h4>
+                            <div *ngFor="let horario of horarios">
+                                <h5> {{horario.especialidad}} </h5>
+
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Dia</th>
+                                            <th scope="col">Ingreso</th>
+                                            <th scope="col">Salida</th> 
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngFor="let h of horario.horarios">
+                                        <tr *ngIf="h.trabaja"> 
+                                            <th scope="row"> {{h.dia}} </th>
+                                            <td>{{h.ingreso}}</td>
+                                            <td>{{h.salida}}</td> 
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button class="btn  btn-warning" (click)="cargarHorarios()">Cambiar mis horarios</button>
+                        </div>
+
+                        <div *ngIf="!tieneHorarios">
+                            <button class="btn  btn-warning" (click)="cargarHorarios()">Cargar horarios</button>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

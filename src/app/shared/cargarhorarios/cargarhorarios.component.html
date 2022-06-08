@@ -1,0 +1,37 @@
+ 
+<h2><b>Mis horarios de atención al publico</b></h2>
+<select class="form-select form-select-lg "  ([ngModel])="especialidad_elegida">
+    <option *ngFor="let especialidad of especialidades" 
+            value="{{especialidad}}" ngDefaultControl> {{especialidad}} 
+    </option>
+</select>
+<table class="table table-hover" >
+    <thead>
+        <tr>
+            <th scope="col">Trabajo este dia ?</th>
+            <th scope="col">Dias</th> 
+            <th scope="col">Comienzo de jornada</th>
+            <th scope="col">Fin de jornada</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dia of dias_check;let i = index">
+            <td>
+                <input type="checkbox" [(ngModel)]='dias_check[i].trabaja' >
+            </td>
+            <td>{{dias_check[i].dia}}</td>
+            <td>
+             <select  [(ngModel)]='dias_check[i].ingreso'>
+                 <option  class="form-select form-select-lg mb-3" *ngFor="let hora of listaHorarios" value="{{hora}}" ngDefaultControl  > {{hora}} </option>
+             </select>
+            </td>
+            <td>
+                <select  [(ngModel)]='dias_check[i].salida'>
+                    <option  class="form-select form-select-lg mb-3" *ngFor="let hora of listaHorariossalida" value="{{hora}}" ngDefaultControl > {{hora}} </option>
+                </select>
+             
+            </td>
+        </tr>
+    </tbody>
+</table>
+<button class="btn btn-primary btn-block" (click)="guardar()">Guardar</button>

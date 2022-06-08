@@ -14,14 +14,18 @@ import { AppComponent } from './app.component';
 import { BienvenidaComponent } from './pages/bienvenida/bienvenida.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; 
 import { SpinnerModule } from './shared/spinner/spinner.module';
-import { ValidaremailComponent } from './shared/validaremail/validaremail.component'; 
+import { ValidaremailComponent } from './shared/validaremail/validaremail.component';
+import { MiperfilComponent } from './shared/miperfil/miperfil.component';
+import { CargarhorariosComponent } from './shared/cargarhorarios/cargarhorarios.component'; 
 
 
 @NgModule({
   declarations: [
     AppComponent,
     BienvenidaComponent,
-    ValidaremailComponent
+    ValidaremailComponent,
+    MiperfilComponent,
+    CargarhorariosComponent
   ],
   imports: [
     BrowserModule,
