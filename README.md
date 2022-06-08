@@ -39,5 +39,10 @@ Debe elegir que tipo de usuario quiere registrar
  Segun cual elija debera completar distintos datos, todos son obligatorios 
 [![registro2](https://firebasestorage.googleapis.com/v0/b/tpclinica-282c4.appspot.com/o/imagenes-readme%2Fregistro2.png?alt=media&token=d52ff09d-9bcc-4f40-b395-fa6ed9f8881f "registro2")](https://firebasestorage.googleapis.com/v0/b/tpclinica-282c4.appspot.com/o/imagenes-readme%2Fregistro2.png?alt=media&token=d52ff09d-9bcc-4f40-b395-fa6ed9f8881f "registro2")
 
+<<<<<<< HEAD
 ## Login✅
 ![Graficos](src\assets\readme\login.png "Login")
+=======
+# Login✅#
+[ githubReadme/login.png (1424×768)](https://firebasestorage.googleapis.com/v0/b/clinicaonline2022-f5a8c.appspot.com/o/githubReadme%2Flogin.png?alt=media&token=3cb8373e-d39a-43c1-bc64-ec060d79c25e)
+>>>>>>> de1a39597e9363c4e375aedfdc75c1c26b6bc235
