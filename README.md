@@ -34,15 +34,23 @@ pedidos por la web seleccionando el profesional o la especialidad. La duración 
 ##Registro📝
 Debe elegir que tipo de usuario quiere registrar
 
-[![registro1](https://firebasestorage.googleapis.com/v0/b/tpclinica-282c4.appspot.com/o/imagenes-readme%2Fregistro1.png?alt=media&token=28609cf0-b5cd-430f-8025-353ac99dfc37 "registro1")](https://firebasestorage.googleapis.com/v0/b/tpclinica-282c4.appspot.com/o/imagenes-readme%2Fregistro1.png?alt=media&token=28609cf0-b5cd-430f-8025-353ac99dfc37 "registro1")
+[![Captura-de-pantalla-2022-06-07-010421.png](https://i.postimg.cc/DyRSp697/Captura-de-pantalla-2022-06-07-010421.png)](https://postimg.cc/sv9fvYfL)
 
  Segun cual elija debera completar distintos datos, todos son obligatorios 
-[![registro2](https://firebasestorage.googleapis.com/v0/b/tpclinica-282c4.appspot.com/o/imagenes-readme%2Fregistro2.png?alt=media&token=d52ff09d-9bcc-4f40-b395-fa6ed9f8881f "registro2")](https://firebasestorage.googleapis.com/v0/b/tpclinica-282c4.appspot.com/o/imagenes-readme%2Fregistro2.png?alt=media&token=d52ff09d-9bcc-4f40-b395-fa6ed9f8881f "registro2")
+[![Captura-de-pantalla-2022-06-07-010444.png](https://i.postimg.cc/6TxNn8Px/Captura-de-pantalla-2022-06-07-010444.png)](https://postimg.cc/gLs5P2dg)
 
-<<<<<<< HEAD
+ 
 ## Login✅
-![Graficos](src\assets\readme\login.png "Login")
-=======
-# Login✅#
-[ githubReadme/login.png (1424×768)](https://firebasestorage.googleapis.com/v0/b/clinicaonline2022-f5a8c.appspot.com/o/githubReadme%2Flogin.png?alt=media&token=3cb8373e-d39a-43c1-bc64-ec060d79c25e)
->>>>>>> de1a39597e9363c4e375aedfdc75c1c26b6bc235
+ [![login.png](https://i.postimg.cc/rmvpZFHQ/login.png)](https://postimg.cc/Hc9HVHdy)
+
+##Usuarios 
+Como usuario dentro del sistema puede acceder a su perfil
+[![Captura-de-pantalla-2022-06-09-140347.png](https://i.postimg.cc/Dzv410VG/Captura-de-pantalla-2022-06-09-140347.png)](https://postimg.cc/MnLGSWpZ)
+
+
+##Administrador
+Como administrador puede habilitar o restringir el acceso a los usuarios Especialistas
+[![Captura-de-pantalla-2022-06-07-010508.png](https://i.postimg.cc/fyK6t8Ym/Captura-de-pantalla-2022-06-07-010508.png)](https://postimg.cc/4HY8jbLx)
+
+
+
