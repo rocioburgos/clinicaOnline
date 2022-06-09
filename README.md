@@ -31,7 +31,7 @@ pedidos por la web seleccionando el profesional o la especialidad. La duración 
 
 **Pantallas de la aplicacion**
 
-#Registro📝
+##Registro📝
 Debe elegir que tipo de usuario quiere registrar
 
 [![Captura-de-pantalla-2022-06-07-010421.png](https://i.postimg.cc/DyRSp697/Captura-de-pantalla-2022-06-07-010421.png)](https://postimg.cc/sv9fvYfL)
@@ -39,8 +39,18 @@ Debe elegir que tipo de usuario quiere registrar
  Segun cual elija debera completar distintos datos, todos son obligatorios 
 [![Captura-de-pantalla-2022-06-07-010444.png](https://i.postimg.cc/6TxNn8Px/Captura-de-pantalla-2022-06-07-010444.png)](https://postimg.cc/gLs5P2dg)
 
-<<<<<<< HEAD
+ 
 ## Login✅
  [![login.png](https://i.postimg.cc/rmvpZFHQ/login.png)](https://postimg.cc/Hc9HVHdy)
-=======
+
+##Usuarios 
+Como usuario dentro del sistema puede acceder a su perfil
+[![Captura-de-pantalla-2022-06-09-140347.png](https://i.postimg.cc/Dzv410VG/Captura-de-pantalla-2022-06-09-140347.png)](https://postimg.cc/MnLGSWpZ)
+
+
+##Administrador
+Como administrador puede habilitar o restringir el acceso a los usuarios Especialistas
+[![Captura-de-pantalla-2022-06-07-010508.png](https://i.postimg.cc/fyK6t8Ym/Captura-de-pantalla-2022-06-07-010508.png)](https://postimg.cc/4HY8jbLx)
+
+
 
