@@ -34,7 +34,7 @@ pedidos por la web seleccionando el profesional o la especialidad. La duración 
 ##Registro📝
 Debe elegir que tipo de usuario quiere registrar
 
-[![registro1](https://firebasestorage.googleapis.com/v0/b/tpclinica-282c4.appspot.com/o/imagenes-readme%2Fregistro1.png?alt=media&token=28609cf0-b5cd-430f-8025-353ac99dfc37 "registro1")](https://firebasestorage.googleapis.com/v0/b/tpclinica-282c4.appspot.com/o/imagenes-readme%2Fregistro1.png?alt=media&token=28609cf0-b5cd-430f-8025-353ac99dfc37 "registro1")
+[![Captura-de-pantalla-2022-06-07-010421.png](https://i.postimg.cc/DyRSp697/Captura-de-pantalla-2022-06-07-010421.png)](https://postimg.cc/sv9fvYfL)
 
  Segun cual elija debera completar distintos datos, todos son obligatorios 
 [![registro2](https://firebasestorage.googleapis.com/v0/b/tpclinica-282c4.appspot.com/o/imagenes-readme%2Fregistro2.png?alt=media&token=d52ff09d-9bcc-4f40-b395-fa6ed9f8881f "registro2")](https://firebasestorage.googleapis.com/v0/b/tpclinica-282c4.appspot.com/o/imagenes-readme%2Fregistro2.png?alt=media&token=d52ff09d-9bcc-4f40-b395-fa6ed9f8881f "registro2")
