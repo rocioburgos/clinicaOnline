@@ -31,18 +31,16 @@ pedidos por la web seleccionando el profesional o la especialidad. La duración 
 
 **Pantallas de la aplicacion**
 
-#Registro#📝
+#Registro📝
 Debe elegir que tipo de usuario quiere registrar
 
 [![Captura-de-pantalla-2022-06-07-010421.png](https://i.postimg.cc/DyRSp697/Captura-de-pantalla-2022-06-07-010421.png)](https://postimg.cc/sv9fvYfL)
 
  Segun cual elija debera completar distintos datos, todos son obligatorios 
- [![Captura-de-pantalla-2022-06-07-010444.png](https://i.postimg.cc/6TxNn8Px/Captura-de-pantalla-2022-06-07-010444.png)](https://postimg.cc/gLs5P2dg)
- 
+[![Captura-de-pantalla-2022-06-07-010444.png](https://i.postimg.cc/6TxNn8Px/Captura-de-pantalla-2022-06-07-010444.png)](https://postimg.cc/gLs5P2dg)
+
 <<<<<<< HEAD
-# Login#✅
-[![login.png](https://i.postimg.cc/rmvpZFHQ/login.png)](https://postimg.cc/Hc9HVHdy)
+## Login✅
+ [![login.png](https://i.postimg.cc/rmvpZFHQ/login.png)](https://postimg.cc/Hc9HVHdy)
 =======
-# Login✅#
-[ githubReadme/login.png (1424×768)](https://firebasestorage.googleapis.com/v0/b/clinicaonline2022-f5a8c.appspot.com/o/githubReadme%2Flogin.png?alt=media&token=3cb8373e-d39a-43c1-bc64-ec060d79c25e)
->>>>>>> de1a39597e9363c4e375aedfdc75c1c26b6bc235
+
