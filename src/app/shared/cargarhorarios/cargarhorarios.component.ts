@@ -12,9 +12,9 @@ export class CargarhorariosComponent implements OnInit {
 
   public usuario: any = null;
   public especialidades: any;
-  especialidad_elegida: string='Pediatria';
-  tieneHorarios:boolean|any;
-  horariosActuales:any;
+  especialidad_elegida: string = '0';
+  tieneHorarios: boolean | any;
+  horariosActuales: any;
   dias_check: Array<any> = [
     { dia: 'Lunes', trabaja: false, ingreso: 0, salida: 0 },
     { dia: 'Martes', trabaja: false, ingreso: 0, salida: 0 },
@@ -23,8 +23,6 @@ export class CargarhorariosComponent implements OnInit {
     { dia: 'Viernes', trabaja: false, ingreso: 0, salida: 0 },
     { dia: 'Sabado', trabaja: false, ingreso: 0, salida: 0 }
   ];
-
-
   listaHorarios: string[] = ['8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
   listaHorariossalida: string[] = ['9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
 
@@ -34,45 +32,53 @@ export class CargarhorariosComponent implements OnInit {
       this.usuario = JSON.parse(ls);
       this.especialidades = this.usuario.espe;
     }
-
-
-    this.horariosSrv.traerHorariosEspecialista(this.usuario.uid ).subscribe((res)=>{
-      this.horariosActuales=res;
-      this.tieneHorarios=true;
-    })
   }
 
   ngOnInit(): void {
   }
 
   guardar() {
-    console.log("especialidad elegida_: "+this.especialidad_elegida)
- 
+
 
     let especialidad_guardar = {
       uidEspecialista: this.usuario.uid,
-      especialidad: ''+this.especialidad_elegida,
+      especialidad: this.especialidad_elegida,
       horarios: this.dias_check
     }
 
-    if(this.tieneHorarios  ){
-    
-        alert('jeje')
-     
+    if (this.tieneHorarios) {
+
+      console.log('tiene horarios previos.->actualizar:: '+ this.horariosActuales.doc_id)
       
-      /*this.horariosSrv.actualizarHorario( this.horariosActuales.doc_id, especialidad_guardar).finally(() => {
+
+     this.horariosSrv.actualizarHorario( this.horariosActuales.doc_id, especialidad_guardar).finally(() => {
         this.router.navigate(['miperfil'])
-      });*/
-    }else{
-      console.log('asdasd')
-      /*
+      });
+    } else {
+      console.log('no tiene horarios previos->cargar de cero')
+      
     this.horariosSrv.setItem(especialidad_guardar).finally(() =>
               this.router.navigate(['miperfil'])
             );
-      } */
+      } 
 
-    } 
- 
+    }
+  
 
-}
+  capturar() {
+    console.log(this.especialidad_elegida);
+    this.horariosSrv.traerHorariosEspecialista_Especialidad(this.usuario.uid, this.especialidad_elegida).subscribe((res) => {
+       if(res.length==1){
+        console.log(res[0].doc_id)
+      
+        this.horariosActuales= res[0];
+         this.tieneHorarios=true;
+       }else{
+         this.tieneHorarios=false;
+       }  
+       console.log('hroarios= '+this.tieneHorarios)
+      
+    
+  })
+  }
 }

@@ -26,7 +26,17 @@ export class HorariosService {
 
   
   traerHorariosEspecialista(uidEspecialista:string ){ 
-    this.horariosCollection_especialista = this.afs.collection('horarios', ref => ref.where('uidEspecialista', '==', uidEspecialista)) ;
+    this.horariosCollection_especialista = this.afs.collection('horarios', ref => 
+                                                                ref.where('uidEspecialista', '==', uidEspecialista)
+                                                              ) ;
+    return this.horariosCollection_especialista.valueChanges({idField: "doc_id"});
+  }
+
+  traerHorariosEspecialista_Especialidad(uidEspecialista:string ,especialidad:string){ 
+    this.horariosCollection_especialista = this.afs.collection('horarios', ref => 
+                                                                ref.where('uidEspecialista', '==', uidEspecialista)
+                                                                .where('especialidad','==',especialidad)
+                                                              ) ;
     return this.horariosCollection_especialista.valueChanges({idField: "doc_id"});
   }
 

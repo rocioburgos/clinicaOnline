@@ -1,21 +1,17 @@
 <div class="row animate__animated animate__bounceInRight">
     <div class="col-md-8 mx-auto mt-5">
         <div class="card">
-            <div class="card-body FormularioPaciente">
-                <h1 class="text-center mb-3"><b>Perfil</b></h1>
+            <div class="card-body FormularioPaciente"> 
                 <div class="row" *ngIf="usuario != null">
 
                     <div class="col-md-6 mx-auto mt-2 text-center" *ngIf="usuario.perfil == 'paciente'">
-
-                        <img src="{{usuario.archivo1}}" class="tamanio" alt="foto 1 del usuario">
+                        <img src="{{usuario.archivo1}}" width="300px" alt="foto 1 del usuario">
                     </div>
                     <div class="col-md-6 mx-auto mt-2 text-center" *ngIf="usuario.perfil == 'paciente'">
-
-                        <img src="{{usuario.archivo2}}" class="tamanio" alt="foto 2 del usuario">
+                        <img src="{{usuario.archivo2}}" width="300px" alt="foto 2 del usuario">
                     </div>
                     <div class="col-md-12 mx-auto mt-2 text-center" *ngIf="usuario.perfil != 'paciente'">
-
-                        <img src="{{usuario.archivo}}" class="tamanio" alt="foto 1 del usuario">
+                        <img src="{{usuario.archivo}}" width="300px" alt="foto 1 del usuario">
                     </div>
 
 

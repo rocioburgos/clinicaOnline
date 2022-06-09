@@ -1,10 +1,13 @@
  
 <h2><b>Mis horarios de atención al publico</b></h2>
-<select class="form-select form-select-lg "  ([ngModel])="especialidad_elegida">
+<select class="form-select form-select-lg " [(ngModel)]="especialidad_elegida" (change)="capturar()">
+    <option selected value="0">Elegir opcion</option>
     <option *ngFor="let especialidad of especialidades" 
             value="{{especialidad}}" ngDefaultControl> {{especialidad}} 
     </option>
 </select>
+<div *ngIf="especialidad_elegida!= '0'">
+
 <table class="table table-hover" >
     <thead>
         <tr>
@@ -34,4 +37,7 @@
         </tr>
     </tbody>
 </table>
+
+
 <button class="btn btn-primary btn-block" (click)="guardar()">Guardar</button>
+</div>
