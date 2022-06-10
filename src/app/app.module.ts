@@ -37,7 +37,7 @@ import { CargarhorariosComponent } from './shared/cargarhorarios/cargarhorarios.
     AngularFirestoreModule ,
     AngularFireStorageModule,
     NgbModule,
-    HttpClientModule,
+    HttpClientModule, 
     SpinnerModule
 
  

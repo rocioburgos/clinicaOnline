@@ -32,6 +32,10 @@ const routes: Routes = [
     canActivate:[EspecialistalogueadoGuard]
   },
   {
+    path:'turnos', 
+    loadChildren: () => import('./modulos/turnos/turnos.module').then(m => m.TurnosModule)
+  },
+  {
     path:'',
     redirectTo: 'bienvenida',
     pathMatch:'full'

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { Observable } from 'rxjs';
 import { SpinnerService } from '../spinner/spinner.service';
 
 @Injectable({
@@ -43,5 +44,10 @@ export class UsuarioService {
   traerEspecialistasFiltro( ){ 
     return this.afs.collection('usuarios', ref => ref.where('perfil', '==',  'especialista' ))
                       .valueChanges({idField: "doc_id"})  
+  }
+
+  traerEspecialistas( ): any{ 
+    return this.afs.collection('usuarios', ref => ref.where('perfil', '==',  'especialista' ))
+                      .valueChanges() ;
   }
 }

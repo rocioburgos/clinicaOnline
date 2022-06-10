@@ -7,9 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BienvenidaComponent implements OnInit {
 
-  constructor() { }
+  public usuario: any = null;
+  constructor() {
+    let ls = localStorage.getItem('usuario_clinica');
+    if( ls != null){
+      
+         this.usuario =    JSON.parse( ls);  
+      console.log(this.usuario)
+        } 
+   }
 
   ngOnInit(): void {
   }
+
+
 
 }
