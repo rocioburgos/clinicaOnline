@@ -55,7 +55,7 @@
     <label>Elegir una opcion: </label>
     <br>
     <div *ngFor='let esp of especialidades'>
-      <input formControlName='especialidadCheck' type="checkbox" value=" {{esp.nombre}} " (change)="selEsp($event)">
+      <input formControlName='especialidadCheck' type="checkbox" value="{{esp.nombre}}" (change)="selEsp($event)">
       {{esp.nombre}} <br>
   
       <small class="form-text text-muted"

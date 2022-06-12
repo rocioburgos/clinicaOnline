@@ -6,6 +6,7 @@ import { PrincipalTurnosComponent } from './principalTurnos/principal-turnos.com
 import { FormsModule } from '@angular/forms';
 import { SacarTurnoComponent } from './sacar-turno/sacar-turno.component';
 import { MisTurnosComponent } from './mis-turnos/mis-turnos.component';
+import { SpinnerModule } from 'src/app/shared/spinner/spinner.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { MisTurnosComponent } from './mis-turnos/mis-turnos.component';
   imports: [
     CommonModule,
     FormsModule,
-    TurnosRoutingModule
+    TurnosRoutingModule,
+    SpinnerModule
   ]
 })
 export class TurnosModule { }

@@ -4,30 +4,31 @@
             <div class="p-3 border bg-light">
                 <h3>Especialidades</h3>
                 <div>
-                    <div class="form-check" > 
+                    <app-spinner></app-spinner>
+                    <div class="form-check">
                         <div class="btn-group " role="group" aria-label="Basic checkbox toggle button group">
-                            <div *ngFor="let espe of especialidadesLista"> 
-                              <button class="btn btn-lg btn-primary" (click)="especialidadCapturar(espe.nombre)">
-                                <img src="{{espe.imagen}} "  width="50px">
-                              </button> 
+                            <div *ngFor="let espe of especialidadesLista">
+                                <button class="btn btn-lg btn-primary" (click)="especialidadCapturar(espe.nombre)">
+                                    <img src="{{espe.imagen}} " width="50px">
+                                </button>
                             </div>
-                          </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="col">
             <div class="p-3 border bg-light">
                 <h3>Especialistas</h3>
                 <div *ngIf="especialidadElegida != '' ">
-                    <div class="form-check"  *ngFor="let especialista of listadoUsuariosEspecialistasCalificados ">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
-                            value=" {{especialista.nombre}} ">
-                        <label class="form-check-label" for="exampleRadios2">
-                             {{especialista.nombre}}
-                        </label>
+                    <div class="form-check" *ngFor="let especialista of listadoUsuariosEspecialistasCalificados ">
+
+                        <button class="btn btn-lg btn-primary" (click)="especialistaCapturar(especialista.uid)">
+                            <label for="">{{especialista.nombre}}</label><br>
+                            <img src="{{especialista.archivo}}" width="50px">
+                        </button>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -35,10 +36,10 @@
 </div>
 
 <table class="table table-success table-striped">
- 
+
     <tbody>
         <tr>
-             
+
             <td><button class="btn btn-success">21/06 9:30</button> </td>
             <td><button class="btn btn-success">21/06 10:00</button> </td>
             <td><button class="btn btn-success">21/06 10:30</button> </td>
@@ -46,7 +47,7 @@
             <td><button class="btn btn-success">21/06 11:30</button> </td>
         </tr>
         <tr>
-             
+
             <td><button class="btn btn-success">22/06 9:30</button> </td>
             <td><button class="btn btn-success">22/06 10:00</button> </td>
             <td><button class="btn btn-success">22/06 10:30</button> </td>

@@ -3,7 +3,7 @@ import { SpinnerService } from 'src/app/servicios/spinner/spinner.service';
 
 @Component({
   selector: 'app-spinner',
-  template: ' <div class="overlay" *ngIf="isLoading$ | async"> <div class="lds-hourglass"></div></div>',
+  templateUrl: './spinner.component.html', 
   styleUrls: ['./spinner.component.css']
 })
 export class SpinnerComponent {

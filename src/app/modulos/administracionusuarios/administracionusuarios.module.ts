@@ -4,6 +4,7 @@ import { PrincipalComponent } from './principal/principal.component';
 import { PanelEspecialistasComponent } from './panel-especialistas/panel-especialistas.component';
 import { AdministracionRoutingModule } from './administracionusuarios.routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SpinnerModule } from 'src/app/shared/spinner/spinner.module';
 
 
 
@@ -16,7 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     AdministracionRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SpinnerModule
   ]
 })
 export class AdministracionusuariosModule { }
