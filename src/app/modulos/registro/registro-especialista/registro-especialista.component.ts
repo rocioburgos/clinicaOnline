@@ -7,6 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FilesService } from 'src/app/servicios/files/files.service';
 import { UsuarioService } from 'src/app/servicios/usuario/usuario.service'; 
 import { SpinnerService } from 'src/app/servicios/spinner/spinner.service';
+import { from } from 'rxjs';
 @Component({
   selector: 'app-registro-especialista',
   templateUrl: './registro-especialista.component.html',
@@ -36,7 +37,7 @@ export class RegistroEspecialistaComponent  {
  public finalizado = false;
 
  captcha: string;      // empty = not yet proven to be a human, anything else = human
-
+ imagen_especialidad='https://firebasestorage.googleapis.com/v0/b/clinicaonline2022-f5a8c.appspot.com/o/especialidades%2F8v.png?alt=media&token=0cbae32a-5b95-45be-b15e-6b75996a1701';
 
  constructor(private fb: FormBuilder,
    private fbesp: FormBuilder,
@@ -65,7 +66,7 @@ export class RegistroEspecialistaComponent  {
    });
 
    this.formulario_Especialidad = fb.group({
-     nombre: ['', [Validators.required]]
+     nombre: ['', [Validators.required]] 
    });
  }
  
@@ -122,11 +123,13 @@ export class RegistroEspecialistaComponent  {
 
  aceptarEspecialidad() {
    
-  this.spinnerSrv.show();
+  this.spinnerSrv.show(); 
    const form = this.formulario_Especialidad.value;
    this.completarForm = false;
+ 
    let datos = {
-     nombre: form.nombre
+     nombre: form.nombre,
+     imagen: this.imagen_especialidad
    } 
    this.especialidadesSrv.registrarEspecialidad(datos).then((res) => {
      this.spinnerSrv.hide();
@@ -147,6 +150,25 @@ export class RegistroEspecialistaComponent  {
 
    console.log(this.formularioEspecialista)
  }
+
+
+ cambioArchivo_especialidad(event:any){
+  this.spinnerSrv.show();
+  this.image = event.target.files[0];
+  
+
+  let img= this.getFilePath();
+  let task = this.fileSrv.uploadFile( img, event.target.files[0]).then((res) => {
+    res.ref.getDownloadURL()
+      .then(ress => {
+       this.spinnerSrv.hide();
+        console.log(ress)
+       this.imagen_especialidad = (ress);
+      });
+  });
+ }
+
+
 
  //Evento que se gatilla cuando el input de tipo archivo cambia
  public cambioArchivo(event: any) {

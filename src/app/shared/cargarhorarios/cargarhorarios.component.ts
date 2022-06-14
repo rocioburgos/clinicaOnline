@@ -16,12 +16,12 @@ export class CargarhorariosComponent implements OnInit {
   tieneHorarios: boolean | any;
   horariosActuales: any;
   dias_check: Array<any> = [
-    { dia: 'Lunes', trabaja: false, ingreso: 0, salida: 0 },
-    { dia: 'Martes', trabaja: false, ingreso: 0, salida: 0 },
-    { dia: 'Miercoles', trabaja: false, ingreso: 0, salida: 0 },
-    { dia: 'Jueves', trabaja: false, ingreso: 0, salida: 0 },
-    { dia: 'Viernes', trabaja: false, ingreso: 0, salida: 0 },
-    { dia: 'Sabado', trabaja: false, ingreso: 0, salida: 0 }
+    { dia: 'lunes', trabaja: false, ingreso: 0, salida: 0 },
+    { dia: 'martes', trabaja: false, ingreso: 0, salida: 0 },
+    { dia: 'miércoles', trabaja: false, ingreso: 0, salida: 0 },
+    { dia: 'jueves', trabaja: false, ingreso: 0, salida: 0 },
+    { dia: 'viernes', trabaja: false, ingreso: 0, salida: 0 },
+    { dia: 'sábado', trabaja: false, ingreso: 0, salida: 0 }
   ];
   listaHorarios: string[] = ['8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
   listaHorariossalida: string[] = ['9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
@@ -37,9 +37,7 @@ export class CargarhorariosComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  guardar() {
-
-
+  guardar() { 
     let especialidad_guardar = {
       uidEspecialista: this.usuario.uid,
       especialidad: this.especialidad_elegida,
@@ -76,9 +74,7 @@ export class CargarhorariosComponent implements OnInit {
        }else{
          this.tieneHorarios=false;
        }  
-       console.log('hroarios= '+this.tieneHorarios)
-      
-    
+       console.log('hroarios= '+this.tieneHorarios) 
   })
   }
 }

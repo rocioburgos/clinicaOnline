@@ -10,7 +10,7 @@ import { SpinnerService } from 'src/app/servicios/spinner/spinner.service';
 export class PrincipalComponent implements OnInit {
   mostrar1=false;
   mostrar2 = false;
-  constructor(private router: Router, private spinnerSrv: SpinnerService) { }
+  constructor(private router: Router ) { }
 
   ngOnInit(): void {
   }
@@ -21,14 +21,14 @@ export class PrincipalComponent implements OnInit {
       setTimeout(() => {
         this.mostrar1 = false;
         this.router.navigate([ruta]);
-      }, 2000);
+      }, 5000);
 
     } else {
       this.mostrar2 = true;
       setTimeout(() => {
         this.mostrar2 = false;
         this.router.navigate([ruta]);
-      }, 2000);
+      }, 5000);
     }
   }
 
