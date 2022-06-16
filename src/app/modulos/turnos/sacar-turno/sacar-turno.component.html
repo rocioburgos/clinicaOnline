@@ -3,7 +3,7 @@
         <div class="col">
             <div class="p-3 border bg-light">
                 <h3>Especialidades</h3>
-                <div> 
+                <div>
                     <div class="form-check">
                         <div class="btn-group " role="group" aria-label="Basic checkbox toggle button group">
                             <div *ngFor="let espe of especialidadesLista">
@@ -32,16 +32,15 @@
             </div>
         </div>
     </div>
-</div>
 
-<table class="table table-success table-striped">
-    <tbody>
-        <tr>
-            <td ><button class="btn btn-success">21/06 9:30</button> </td>
-            <td><button class="btn btn-success">21/06 10:00</button> </td>
-            <td><button class="btn btn-success">21/06 10:30</button> </td>
-            <td><button class="btn btn-success">21/06 11:00</button> </td>
-            <td><button class="btn btn-success">21/06 11:30</button> </td>
-        </tr> 
-    </tbody>
+ 
+
+
+<table class="table-primary">
+    <tr class="table-primary" *ngFor="let x of horarios_final">
+        <td class="table-primary" *ngFor="let hora of x[0].horarios"> 
+            <button class="col btn btn-success" (click)="reservarTurno(x[0].dia , hora.hora)">{{x[0].dia}} {{hora.hora}}</button>
+        </td>
+    </tr>
 </table>
+</div>

@@ -44,4 +44,11 @@ export class AuthService {
   async sendEmailVerification(){
     return (await this.afAuth.currentUser)?.sendEmailVerification();
   }
+
+  getUsuarioActualLS(){
+    let ls = localStorage.getItem('usuario_clinica');
+    if( ls != null){
+        return JSON.parse( ls);  
+   } 
+  }
 }

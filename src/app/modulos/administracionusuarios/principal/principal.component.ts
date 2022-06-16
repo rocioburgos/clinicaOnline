@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { rejects } from 'assert';
 import { SpinnerService } from 'src/app/servicios/spinner/spinner.service';
 
 @Component({
@@ -16,20 +17,23 @@ export class PrincipalComponent implements OnInit {
   }
 
   rutear(ruta: string) {
-    if (ruta == 'registro') {
-      this.mostrar1 = true;
-      setTimeout(() => {
-        this.mostrar1 = false;
-        this.router.navigate([ruta]);
-      }, 5000);
+    new Promise((resolve,reject)=>{
+      if (ruta == 'registro') {
+        this.mostrar1 = true;
+        setTimeout(() => {
+          this.mostrar1 = false;
+          this.router.navigate([ruta]);
+        }, 5000);
+  
+      } else {
+        this.mostrar2 = true;
+        setTimeout(() => {
+          this.mostrar2 = false;
+          this.router.navigate([ruta]);
+        }, 5000);
+      }
+    })
+ 
 
-    } else {
-      this.mostrar2 = true;
-      setTimeout(() => {
-        this.mostrar2 = false;
-        this.router.navigate([ruta]);
-      }, 5000);
-    }
-  }
-
+}
 }

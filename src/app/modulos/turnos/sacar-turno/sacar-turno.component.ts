@@ -5,6 +5,9 @@ import { SpinnerService } from 'src/app/servicios/spinner/spinner.service';
 import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
 import { Moment } from 'moment';
 import * as moment from 'moment';
+import { TurnosService } from 'src/app/servicios/turnos/turnos.service';
+import { AuthService } from 'src/app/servicios/auth/auth.service';
+import { Usuario } from 'src/app/clases/usuario';
 moment.locale('es')
 @Component({
   selector: 'app-sacar-turno',
@@ -13,6 +16,7 @@ moment.locale('es')
 })
 export class SacarTurnoComponent implements OnInit {
 
+  paciente:Usuario | any;
   especialidadesLista: Array<any> = [];
   especialidadElegida: string = '';
   especialistasDisponibles: Array<any> = [];
@@ -21,7 +25,7 @@ export class SacarTurnoComponent implements OnInit {
   proximosQuinceDias: Array<any> = [];
   horarios_final: Array<any> = [];
   constructor(private especialidadesSrv: EspecialidadesService, private especialistasSrv: UsuarioService
-    , private horariosSrv: HorariosService) {
+    , private horariosSrv: HorariosService, private turnoSrv:TurnosService, private authSrv:AuthService) {
     this.especialidadesSrv.traerEspecialidades().subscribe((res) => {
       this.especialidadesLista = res;
     });
@@ -32,6 +36,9 @@ export class SacarTurnoComponent implements OnInit {
     });
 
     this.proximosQuinceDias = this.calculaDiasProximos();
+
+    this.paciente = (this.authSrv.getUsuarioActualLS());
+    console.log(this.paciente)
   }
 
   ngOnInit(): void {
@@ -41,6 +48,7 @@ export class SacarTurnoComponent implements OnInit {
   especialidadCapturar(especialidad: string) {
     console.log(especialidad)
     this.listadoUsuariosEspecialistasCalificados = [];
+    this.horarios_final = [];
     this.especialidadElegida = especialidad;
 
     this.especialistasDisponibles.forEach(especilista => { 
@@ -53,14 +61,13 @@ export class SacarTurnoComponent implements OnInit {
     });
   }
 
-  especialistaCapturar(uid: string) {
-    this.horarios_final = [];
+  especialistaCapturar(uid: string) { 
     console.log(uid);
     this.especialista_elegido = uid;
 
     let duracionMinEspecialidad: number = 30;
     this.horariosSrv.traerHorariosEspecialista_Especialidad(this.especialista_elegido, this.especialidadElegida).subscribe((res: any) => {
-
+      this.horarios_final = [];
       if (res[0] == null) {
         console.log("este especialista no tiene horarios cargados")
       } else {
@@ -76,7 +83,9 @@ export class SacarTurnoComponent implements OnInit {
       }
     });
 
-    console.log(this.horarios_final)
+    this.horarios_final.forEach(element => {
+        console.log(element)
+    }); 
   }
 
 
@@ -102,9 +111,40 @@ export class SacarTurnoComponent implements OnInit {
 
 
     for (let i = 0; i < cantidadMinutos; i += duracionTurno) {
-      retorno[0].horarios.push({ hora: inicio.clone().add(i, 'minutes').format(formato), disponible: true });
+      let nuevaHora=inicio.clone().add(i, 'minutes').format(formato);
+      if(!this.turnoReservado(dia, nuevaHora,this.especialista_elegido, this.especialidadElegida)){
+        retorno[0].horarios.push({ hora: nuevaHora, disponible: true });
+      }
+    
     }
     return retorno;
+  }
+
+  turnoReservado(dia:string, hora:string  ,especialista_id:string, especialidad:string ):boolean{
+    //traer turnos de la especialista y la especialidad
+    //ver si por ese dia y hora hay algun turno
+    //si hay algun turno retornar true sino false
+    let retorno=false;
+    this.turnoSrv.traerTurnosEspecialista_Especialidad(especialista_id,especialidad).subscribe((res)=>{
+       if(res[0]!=null){
+         console.log(res[0]) 
+          
+         }  
+       } )
+      return retorno;
+  }
+
+  reservarTurno(dia:any, hora:string){
+    console.log(dia+' -'+hora)
+    let nuevoTurno={
+      paciente_id: this.paciente.uid,
+      especialista_id: this.especialista_elegido,
+      especialidad:this.especialidadElegida,
+      dia:dia,
+      hora:hora,
+      estado:'pendiente confirmacion'
+    }
+    this.turnoSrv.setItem(nuevoTurno)
   }
 
 }
