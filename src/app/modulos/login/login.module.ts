@@ -6,6 +6,7 @@ import { LoginComponent } from './login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SpinnerModule } from 'src/app/shared/spinner/spinner.module';
 import { LogoutComponent } from './logout/logout.component';
+ 
 
 
 @NgModule({
@@ -18,7 +19,7 @@ import { LogoutComponent } from './logout/logout.component';
     LoginRoutingModule,
     FormsModule,
     ReactiveFormsModule,  
-    SpinnerModule
+    SpinnerModule 
   ]
 })
 export class LoginModule { }

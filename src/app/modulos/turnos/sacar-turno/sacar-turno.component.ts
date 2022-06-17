@@ -142,7 +142,12 @@ export class SacarTurnoComponent implements OnInit {
       especialidad:this.especialidadElegida,
       dia:dia,
       hora:hora,
-      estado:'pendiente confirmacion'
+      estado:'pendiente confirmacion',
+      comentario_rechazo:'',
+      comentario_cancelacion:'',
+      resenia:'',
+      calificacion_atencion:0
+
     }
     this.turnoSrv.setItem(nuevoTurno)
   }

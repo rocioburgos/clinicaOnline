@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SpinnerModule } from 'src/app/shared/spinner/spinner.module'; 
 import { NgHcaptchaModule } from 'ng-hcaptcha';
+ 
 
 @NgModule({
   declarations: [ 
@@ -23,6 +24,7 @@ import { NgHcaptchaModule } from 'ng-hcaptcha';
     RegistroRoutingModule,
     FormsModule,
     ReactiveFormsModule ,
+ 
     
     NgbModule,  //PARA LOS USAR LOS MODALES DE BOOTSTRAP
      SpinnerModule,

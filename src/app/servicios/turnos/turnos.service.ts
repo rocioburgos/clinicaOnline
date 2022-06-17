@@ -35,7 +35,7 @@ export class TurnosService {
   traerTurnosEspecialista(uidEspecialista:string ){ 
     this.turnosCollection_especialista = this.afs.collection('turnos', ref => 
                                                                 ref.where('especialista_id', '==', uidEspecialista)
-                                                              ) ;
+                                                              );
     return this.turnosCollection_especialista.valueChanges({idField: "doc_id"});
   }
 
@@ -48,10 +48,19 @@ export class TurnosService {
   }
 
   actualizarTurno(id:string, item:any){
-    let horario =  this.turnosCollection.doc(id);
-  
-    return horario.update({
-      horarios: item.horarios,
+    let turno =  this.turnosCollection.doc(id);
+
+    return turno.update({
+      dia: item.dia,
+      especialidad:item.especialidad,
+      especialista_id: item.especialista_id,
+      estado: item.estado,
+      hora:item.hora,
+      paciente_id: item.paciente_id,
+      resenia:item.resenia,
+      comentario_cancelacion: item.comentario_cancelacion,
+      comentario_rechazo: item.comentario_rechazo,
+      calificacion_atencion:item.calificacion_atencion
     }) 
    }  
 

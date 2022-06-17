@@ -1,3 +1,4 @@
+ 
 <h3>Registro administrador</h3>
 <form [formGroup]='formulario' (ngSubmit)='aceptarAdministrador()'>
   <app-spinner></app-spinner>
@@ -63,10 +64,10 @@
 
 
     <div class="form-group">
-      <input class="file-input" type="file" formControlName="archivo1" (change)="cambioArchivo($event)">
+      <input class="file-input" type="file" formControlName="archivo" (change)="cambioArchivo($event)">
       <br> 
       <small class="form-text text-muted"
-        *ngIf="formulario.get('archivo1')?.hasError('required') && formulario.get('archivo1')?.touched">El
+        *ngIf="formulario.get('archivo')?.hasError('required') && formulario.get('archivo')?.touched">El
         archivo es requerida.</small>
     </div>
     

@@ -16,24 +16,7 @@ export class PrincipalComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  rutear(ruta: string) {
-    new Promise((resolve,reject)=>{
-      if (ruta == 'registro') {
-        this.mostrar1 = true;
-        setTimeout(() => {
-          this.mostrar1 = false;
-          this.router.navigate([ruta]);
-        }, 5000);
-  
-      } else {
-        this.mostrar2 = true;
-        setTimeout(() => {
-          this.mostrar2 = false;
-          this.router.navigate([ruta]);
-        }, 5000);
-      }
-    })
- 
-
-}
+  rutear(ruta: string) { 
+    this.router.navigate([ruta]);
+  }
 }

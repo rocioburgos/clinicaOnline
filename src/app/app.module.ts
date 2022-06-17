@@ -16,7 +16,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SpinnerModule } from './shared/spinner/spinner.module';
 import { ValidaremailComponent } from './shared/validaremail/validaremail.component';
 import { MiperfilComponent } from './shared/miperfil/miperfil.component';
-import { CargarhorariosComponent } from './shared/cargarhorarios/cargarhorarios.component'; 
+import { CargarhorariosComponent } from './shared/cargarhorarios/cargarhorarios.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+ 
+  
 
 
 @NgModule({
@@ -25,7 +28,9 @@ import { CargarhorariosComponent } from './shared/cargarhorarios/cargarhorarios.
     BienvenidaComponent,
     ValidaremailComponent,
     MiperfilComponent,
-    CargarhorariosComponent
+    CargarhorariosComponent ,
+    NavbarComponent 
+     
   ],
   imports: [
     BrowserModule,
@@ -38,10 +43,11 @@ import { CargarhorariosComponent } from './shared/cargarhorarios/cargarhorarios.
     AngularFireStorageModule,
     NgbModule,
     HttpClientModule, 
-    SpinnerModule
+    SpinnerModule, 
 
  
   ],
+  exports:[ NavbarComponent],
    providers: [ ],
   bootstrap: [AppComponent]
 })

@@ -50,4 +50,9 @@ export class UsuarioService {
     return this.afs.collection('usuarios', ref => ref.where('perfil', '==',  'especialista' ))
                       .valueChanges() ;
   }
+
+  traerPacientes(){
+    return this.afs.collection('usuarios', ref => ref.where('perfil', '==',  'paciente' ))
+    .valueChanges() ;
+  }
 }

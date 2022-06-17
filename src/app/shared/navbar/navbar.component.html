@@ -1,0 +1,81 @@
+<nav class="navbar navbar-light " style="background-color: #e3f2fd;">
+ 
+    <a href="bienvenida">
+      <img src="./../assets/favicon/fav.png" width="30px">
+     <label>Clinica online</label></a>
+      <div *ngIf='!logeado'>
+        <ul class="nav justify-content-end">
+          <li class="nav-item"  >
+            <a class="nav-link" href="registro">Registro</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="sesion/login">Login</a>
+          </li> 
+        </ul>
+      </div> 
+  
+  
+      <div *ngIf='logeado'> 
+        <div *ngIf='paciente'>
+          <ul class="nav justify-content-end">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="turnos/sacarturno" tabindex="-1" aria-disabled="true">sacar Turno</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="turnos/turnospaciente" tabindex="-1" aria-disabled="true">Mis Turnos</a>
+            </li>
+            <li><a href="miperfil"> <img src="{{usuario.archivo1}}" width="30px" height="40px" class="rounded"> </a></li>
+            <li>
+              <p> {{usuario.nombre}} </p>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="sesion/logout" tabindex="-1" aria-disabled="true">Cerrar sesion</a>
+            </li> 
+          </ul>
+        </div>
+    
+    
+        <div *ngIf='especialista'>
+          <ul class="nav justify-content-end">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="turnos/turnosespecialista" tabindex="-1" aria-disabled="true">Turnos</a>
+            </li>
+            <li><a href="miperfil"><img src="{{usuario.archivo}}" width="50px" class="rounded"></a></li>
+            <li>
+              <p> {{usuario.nombre}} </p>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="sesion/logout" tabindex="-1" aria-disabled="true">Cerrar sesion</a>
+            </li> 
+          </ul>
+        </div>
+    
+        <div *ngIf='administrador'>
+          <ul class="nav justify-content-end">
+            <li class="nav-item"  >
+              <a class="nav-link" href="administracion" tabindex="-1" aria-disabled="true">Home admin</a>
+            </li>
+            <li class="nav-item"  >
+              <a class="nav-link" href="turnos/turnosadmin" tabindex="-1" aria-disabled="true">Turnos</a>
+            </li>
+            
+            <li><a href="miperfil"><img src="{{usuario.archivo1}}" width="50px" class="rounded"></a></li>
+            <li>
+              <a href="miperfil"><p> {{usuario.nombre}} </p></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="sesion/logout" tabindex="-1" aria-disabled="true">Cerrar sesion</a>
+            </li>
+          </ul>
+        </div>
+    
+      </div>
+    
+    
+    </nav>

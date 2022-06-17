@@ -40,7 +40,7 @@ export class RegistroAdministradorComponent implements OnInit {
 
       email: ['', [Validators.required, Validators.email]],
       clave: ['', Validators.required],
-      archivo1: [null, Validators.required],
+      archivo: [null, Validators.required],
       captcha:[ null, [Validators.required]]
      
     });
