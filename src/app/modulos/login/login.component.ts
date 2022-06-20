@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import * as moment from 'moment'; 
 import { AuthService } from 'src/app/servicios/auth/auth.service';
+import { LogsesionService } from 'src/app/servicios/logsesion.service';
 import { SpinnerService } from 'src/app/servicios/spinner/spinner.service';
 import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
 
@@ -23,7 +25,8 @@ export class LoginComponent  {
     {email:'wetor99710@nzaif.com', clave:'123456', imagen:'./../../../assets/usuarios-login/general.jpg'}
   ]
   constructor(private fb: FormBuilder, private authSrv: AuthService, private router: Router,
-    private usrSrv: UsuarioService, private spinnerSrv:SpinnerService) {
+    private usrSrv: UsuarioService, private spinnerSrv:SpinnerService,
+    private sesionSrv:LogsesionService) {
     this.formulario = fb.group({
       email: ['', [Validators.required, Validators.email]],
       clave: ['', Validators.required],
@@ -37,7 +40,13 @@ export class LoginComponent  {
     let datos = {
       email: form.email,
       clave: form.clave,
-    };
+    }; 
+    let formato =  "DD-MM-YYYY HH:mm";
+    let  log = {
+      id: '',
+      fecha: moment().format(formato),
+      emailUsuario: form.email 
+    }
 
     try {
       await this.authSrv.loginUser(datos.email, datos.clave).then(async (res) => { 
@@ -48,6 +57,8 @@ export class LoginComponent  {
           case 'administrador':
             if(res.user?.emailVerified){
               localStorage.setItem('usuario_clinica', JSON.stringify({ ...user })); 
+              log.id=  res?.user?.uid; 
+              this.sesionSrv.altaLog(log);
               this.router.navigate(['administracion']);
             }else{
               this.mensaje='Debe verificar su email.';
@@ -58,6 +69,8 @@ export class LoginComponent  {
              if(res.user?.emailVerified){
               if (user.estado == 'habilidato') {
                 localStorage.setItem('usuario_clinica', JSON.stringify({ ...user })); 
+                log.id=  res?.user?.uid;
+                this.sesionSrv.altaLog(log);
                  this.router.navigate(['']);
     
               } else {
@@ -70,6 +83,8 @@ export class LoginComponent  {
              case 'paciente':
               if(res.user?.emailVerified){
                 localStorage.setItem('usuario_clinica', JSON.stringify({ ...user })); 
+                log.id=  res?.user?.uid;
+                this.sesionSrv.altaLog(log);
                 this.router.navigate(['']);
               }else{
                 this.mensaje='Debe verificar su email.';
@@ -91,6 +106,5 @@ export class LoginComponent  {
 
   completar(perfil: any) {
     this.formulario.setValue({'email':perfil.email , 'clave': perfil.clave})
-  
   } 
 }

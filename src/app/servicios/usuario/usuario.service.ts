@@ -24,7 +24,10 @@ export class UsuarioService {
     this.usuariosCollection = this.afs.collection('usuarios', ref => ref.where('perfil', '==', 'especialista'));
     return this.usuariosCollection.valueChanges({idField: "doc_id"});
   }
- 
+  traerTodos(){ 
+    this.usuariosCollection = this.afs.collection('usuarios');
+    return this.usuariosCollection.valueChanges({idField: "doc_id"});
+  }
 
 
   getUserByUid(uid:string){

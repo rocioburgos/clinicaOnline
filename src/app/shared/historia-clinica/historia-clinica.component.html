@@ -1,0 +1,23 @@
+<div class="row animate__animated animate__bounceInRight">
+    <div class="col-md-8 mx-auto mt-5">
+        <div class="card">
+            <div class="card-body">
+                <div class="row" *ngIf="usuario.perfil=='paciente'">
+                    <div *ngFor="let atencion of listaHistoriaClinica">
+                        <label for=""> {{atencion.dia }} {{atencion.hora}}- {{atencion.especialidad}} </label>
+                        <button class="btn btn-info" (click)="verHistoria(atencion)">Ver Historia clinica</button>
+                    </div>
+                </div>
+                <div class="row" *ngIf="usuario.perfil=='administrador'">
+                    <div *ngFor="let atencion of listaHistoriaClinica">
+
+                        <img src="{{atencion.paciente.archivo1}} " class="img-redonda" width="50px">
+                        <label>{{atencion.paciente.apellido }}, {{atencion.paciente.nombre }} </label>
+                        <label for=""> {{atencion.HC.dia }} {{atencion.HC.hora}}- {{atencion.HC.especialidad}} </label>
+                        <button class="btn btn-info" (click)="verHistoria(atencion.HC)">Ver Historia clinica</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

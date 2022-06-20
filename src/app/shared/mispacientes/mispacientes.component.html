@@ -1,0 +1,19 @@
+<div class="row animate__animated animate__bounceInRight">
+    <div class="col-md-8 mx-auto mt-5">
+        <div class="card">
+            <div class="card-body">
+                <div class="row" *ngIf="usuario.perfil == 'especialista'">
+                    <h1>Mis pacientes</h1>
+                    <div *ngFor="let atencion of listaHistoriaClinica"> 
+                        
+                        <img src="{{atencion.paciente.archivo1}}" class="img-redonda" width="50px">
+                        <label >{{atencion.paciente.apellido }}, {{atencion.paciente.nombre }}</label><br>
+                        <label > {{atencion.HC | atencion}} </label>
+                        <button class="btn btn-info" (click)="verHistoria(atencion.HC)">Ver Historia clinica</button>
+                   <hr>
+                    </div>
+                </div> 
+            </div> 
+        </div>
+    </div>
+</div>

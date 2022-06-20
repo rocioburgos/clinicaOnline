@@ -18,6 +18,9 @@ import { ValidaremailComponent } from './shared/validaremail/validaremail.compon
 import { MiperfilComponent } from './shared/miperfil/miperfil.component';
 import { CargarhorariosComponent } from './shared/cargarhorarios/cargarhorarios.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
+import { HistoriaClinicaComponent } from './shared/historia-clinica/historia-clinica.component';
+import { MispacientesComponent } from './shared/mispacientes/mispacientes.component';
+import { AtencionPipe } from './pipes/atencion.pipe';
  
   
 
@@ -29,7 +32,10 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
     ValidaremailComponent,
     MiperfilComponent,
     CargarhorariosComponent ,
-    NavbarComponent 
+    NavbarComponent,
+    HistoriaClinicaComponent,
+    MispacientesComponent,
+    AtencionPipe 
      
   ],
   imports: [

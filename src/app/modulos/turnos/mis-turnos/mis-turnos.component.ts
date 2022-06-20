@@ -1,6 +1,5 @@
-import { StringMap } from '@angular/compiler/src/compiler_facade_interface';
+
 import { Component, OnInit } from '@angular/core';
-import { resetFakeAsyncZone } from '@angular/core/testing';
 import { AuthService } from 'src/app/servicios/auth/auth.service';
 import { EspecialidadesService } from 'src/app/servicios/especialidades/especialidades.service';
 import { TurnosService } from 'src/app/servicios/turnos/turnos.service';
@@ -17,7 +16,8 @@ export class MisTurnosComponent implements OnInit {
   public especialistasDisponibles: Array<any> = [];
   public turnosPaciente: Array<any> = [];
   public filtro: string = '';
-
+  completarEncuesta_flag:boolean= false;
+  turnoEncuesta:any;
   constructor(private especialidadesSrv: EspecialidadesService, private especialistasSrv: UsuarioService,
     private authSrv: AuthService, private turnosSrv: TurnosService) {
 
@@ -59,34 +59,45 @@ export class MisTurnosComponent implements OnInit {
   }
 
 
-  async cancelarTurno(turno: any) {
+cancelarTurno(turno: any) {
     let comentario = '';
-    const { value: text } = await Swal.fire({
-      input: 'textarea',
-      inputLabel: 'Comente porque cancela el turno',
-      inputPlaceholder: 'Escriba su comentario...',
-      inputAttributes: {
-        'aria-label': 'Escriba su comentario...'
-      },
-      showCancelButton: true
-    })
+    Swal.fire({
+      title: 'Seguro de cancelar el turno?',
+      showDenyButton: true,
+      confirmButtonText: 'Si'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          input: 'textarea',
+          inputLabel: 'Comente porque cancela el turno',
+          inputPlaceholder: 'Escriba su comentario...',
+          inputAttributes: {
+            'aria-label': 'Escriba su comentario...'
+          },
+          showCancelButton: true
+        }).then((respuesta) => {
+          console.log('motivo de cancelacion: ' + respuesta.value)
+          
+          comentario=respuesta.value;
+          let turnoUpd = {
+            dia: turno.dia,
+            especialidad: turno.especialidad,
+            especialista_id: turno.especialista_id,
+            estado: 'cancelado',
+            hora: turno.hora,
+            paciente_id: turno.paciente_id,
+            comentario_cancelacion: comentario,
+            resenia: turno.resenia,
+            comentario_rechazo: turno.comentario_rechazo,
+            calificacion_atencion: turno.calificacion_atencion
+          }
+          this.turnosSrv.actualizarTurno(turno.doc_id, turnoUpd).then((fin)=>{
+              Swal.fire('Turno cancelado') 
+          });
+        });
+      }
+    }); 
 
-
-    comentario = text;
-
-    let turnoUpd = {
-      dia: turno.dia,
-      especialidad: turno.especialidad,
-      especialista_id: turno.especialista_id,
-      estado: 'cancelado',
-      hora: turno.hora,
-      paciente_id: turno.paciente_id,
-      comentario_cancelacion: comentario,
-      resenia: turno.resenia,
-      comentario_rechazo: turno.comentario_rechazo,
-      calificacion_atencion:turno.calificacion_atencion
-    }
-    this.turnosSrv.actualizarTurno(turno.doc_id, turnoUpd);
   }
 
   verResenia(turno: any) {
@@ -98,42 +109,30 @@ export class MisTurnosComponent implements OnInit {
   }
 
   async completarEncuesta(turno: any) {
-    const inputOptions = new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          '#ff0000': 'Red',
-          '#00ff00': 'Green',
-          '#0000ff': 'Blue'
-        })
-      }, 1000)
-    });
+    this.turnoEncuesta= turno;
+    this.completarEncuesta_flag= true;
+   }
+   manejarEncuesta(event:any){
+    this.completarEncuesta_flag= event;
+   }
 
-    const { value: color } = await Swal.fire({
-      title: 'Select color',
-      input: 'radio',
-      inputOptions: inputOptions
+  async calificarAtencion(turno: any) {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
     })
 
-
-  }
-
- async calificarAtencion(turno: any) {
-  const swalWithBootstrapButtons = Swal.mixin({
-    customClass: {
-      confirmButton: 'btn btn-success',
-      cancelButton: 'btn btn-danger'
-    },
-    buttonsStyling: false
-  })
-
-     Swal.fire({
+    Swal.fire({
       title: 'Califique la atencion',
       icon: 'question',
       input: 'range',
-      inputLabel: 'Tu puntaje',  
-      inputValue: 0, 
-      showCancelButton:true
-    }).then((result)=>{
+      inputLabel: 'Tu puntaje',
+      inputValue: 0,
+      showCancelButton: true
+    }).then((result) => {
       console.log(result)
 
       if (result.isConfirmed) {
@@ -150,21 +149,21 @@ export class MisTurnosComponent implements OnInit {
           comentario_rechazo: turno.comentario_rechazo,
           calificacion_atencion: result.value
         }
-        this.turnosSrv.actualizarTurno(turno.doc_id, turnoUpd).finally(()=>{
+        this.turnosSrv.actualizarTurno(turno.doc_id, turnoUpd).finally(() => {
           swalWithBootstrapButtons.fire(
-            'Calificado!' 
+            'Calificado!'
           )
         });
 
 
-      } else if(result.isDismissed){
+      } else if (result.isDismissed) {
         swalWithBootstrapButtons.fire(
-          'Cancelado!' 
+          'Cancelado!'
         )
       }
     });
 
-    
+
 
   }
 

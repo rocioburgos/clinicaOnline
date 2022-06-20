@@ -9,7 +9,7 @@ export class FiltroPacientePipe implements PipeTransform {
     const turnosPaciente :Array<any>= [];
 
     for (const turno of value) {
-       console.log(turno);
+     
       if (turno?.especialidad!.toLowerCase().indexOf(arg.toLowerCase()) > -1) {
         turnosPaciente.push(turno);
       }

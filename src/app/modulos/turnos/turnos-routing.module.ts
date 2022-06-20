@@ -5,6 +5,7 @@ import { EspecialistalogueadoGuard } from 'src/app/guards/especialistalogueado.g
 import { PacienteadminlogueadosGuard } from 'src/app/guards/pacienteadminlogueados.guard';
 import { PacientelogueadoGuard } from 'src/app/guards/pacientelogueado.guard';
 import { UsuarioIngresadoGuard } from 'src/app/guards/usuario-ingresado.guard';
+import { HistoriaComponent } from './historia/historia.component';
 import { MisTurnosComponent } from './mis-turnos/mis-turnos.component';
 import { MisturnosEspecialistaComponent } from './misturnos-especialista/misturnos-especialista.component';
 import { PrincipalTurnosComponent } from './principalTurnos/principal-turnos.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path:'turnospaciente', component:MisTurnosComponent, canActivate:[PacientelogueadoGuard]},
   {path:'turnosespecialista', component:MisturnosEspecialistaComponent, canActivate:[EspecialistalogueadoGuard]},
   {path:'turnosadmin', component:TurnosadminComponent, canActivate:[AdministradorLogueadoGuard]},
+  {path:'historiaclinica', component:HistoriaComponent},
   {
     path:'**',
     redirectTo: '',

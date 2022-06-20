@@ -24,6 +24,12 @@ export class TurnosService {
     return this.turnosCollection.valueChanges({idField: "doc_id"});
   }
   
+  traerTurnosById(uid:string){ 
+    this.turnosCollection = this.afs.collection('turnos', ref => 
+                                                  ref.where('turno_id', '==', uid)
+                                                ) ;
+    return this.turnosCollection.valueChanges({idField: "doc_id"});
+  }
   
   traerTurnosPaciente(uid:string){ 
     this.turnosCollection = this.afs.collection('turnos', ref => 
@@ -61,7 +67,7 @@ export class TurnosService {
       comentario_cancelacion: item.comentario_cancelacion,
       comentario_rechazo: item.comentario_rechazo,
       calificacion_atencion:item.calificacion_atencion
-    }) 
+    }); 
    }  
 
    eliminarTurno(){}

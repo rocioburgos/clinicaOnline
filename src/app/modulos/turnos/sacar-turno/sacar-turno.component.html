@@ -32,6 +32,21 @@
                 </div>
             </div>
         </div>
+        <div class="col" *ngIf="paciente.perfil=='administrador'">
+            <div class="p-3 border bg-light">
+                <h3>Pacientes</h3>
+                <div *ngIf="especialista_elegido != '' ">
+                    <div class="form-check" *ngFor="let paciente of listadoPacientes">
+
+                        <button class="btn btn-lg btn-primary" (click)="pacienteElegido(paciente)" >
+                            <label for="">{{paciente.nombre}}</label><br>
+                            <img src="{{paciente.archivo1}}" width="50px">
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 
  
@@ -40,7 +55,7 @@
 <table class="table-primary">
     <tr class="table-primary" *ngFor="let x of horarios_final">
         <td class="table-primary" *ngFor="let hora of x[0].horarios"> 
-            <button class="col btn btn-success" (click)="reservarTurno(x[0].dia , hora.hora)">{{x[0].dia}} {{hora.hora}}</button>
+            <button *ngIf="hora.disponible" class="col btn btn-success" (click)="reservarTurno(x[0].dia , hora.hora)">{{x[0].dia}} {{hora.hora}}</button>
         </td>
     </tr>
 </table>

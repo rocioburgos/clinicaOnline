@@ -2,10 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdministradorLogueadoGuard } from './guards/administrador-logueado.guard';
 import { EspecialistalogueadoGuard } from './guards/especialistalogueado.guard';
+import { PacienteadminlogueadosGuard } from './guards/pacienteadminlogueados.guard';
 import { UsuarioIngresadoGuard } from './guards/usuario-ingresado.guard';
 import { BienvenidaComponent } from './pages/bienvenida/bienvenida.component';
 import { CargarhorariosComponent } from './shared/cargarhorarios/cargarhorarios.component';
+import { HistoriaClinicaComponent } from './shared/historia-clinica/historia-clinica.component';
 import { MiperfilComponent } from './shared/miperfil/miperfil.component';
+import { MispacientesComponent } from './shared/mispacientes/mispacientes.component';
 import { ValidaremailComponent } from './shared/validaremail/validaremail.component';
 
 const routes: Routes = [
@@ -34,6 +37,16 @@ const routes: Routes = [
   {
     path:'turnos', 
     loadChildren: () => import('./modulos/turnos/turnos.module').then(m => m.TurnosModule)
+  },
+  {
+    path:'pacientes', 
+    component:MispacientesComponent,
+    canActivate: [EspecialistalogueadoGuard]
+  },
+  {
+    path:'historiasclinicas', 
+    component: HistoriaClinicaComponent,
+    canActivate:[PacienteadminlogueadosGuard]
   },
   {
     path:'',

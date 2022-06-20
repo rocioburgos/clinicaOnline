@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AuthService } from 'src/app/servicios/auth/auth.service';
 import { EspecialidadesService } from 'src/app/servicios/especialidades/especialidades.service';
 import { TurnosService } from 'src/app/servicios/turnos/turnos.service';
 import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
+
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-misturnos-especialista',
@@ -11,15 +12,17 @@ import Swal from 'sweetalert2';
 })
 export class MisturnosEspecialistaComponent implements OnInit {
 
+  turnoFinalizado_flag = false;
+  turnoFinalizado: any;
   especialidadesLista: Array<any> = [];
   turnosEspecialista: Array<any> = [];
   usuario: any;
   pacientes: Array<any> = [];
   turnos: Array<any> = [];
   public filtro: string = ' ';
-  constructor(private turnosSrv: TurnosService, private authSrv: AuthService,
-    private usrSrv: UsuarioService, private especialidadesSrv: EspecialidadesService) {}
 
+  constructor(private turnosSrv: TurnosService, private authSrv: AuthService,
+    private usrSrv: UsuarioService, private especialidadesSrv: EspecialidadesService) { }
 
 
   ngOnInit(): void {
@@ -31,22 +34,23 @@ export class MisturnosEspecialistaComponent implements OnInit {
     });
     this.usrSrv.traerPacientes().subscribe((x) => {
       this.pacientes = x;
-      //console.log( this.pacientes)
     });
     this.cargarTurno();
+
+
   }
 
-  cargarTurno(){
+  cargarTurno() {
     this.turnosSrv.traerTurnosEspecialista(this.usuario.uid).subscribe((res) => {
-  res.forEach(turno => {
-    this.pacientes.forEach(paciente => {
-      if (turno.paciente_id == paciente.uid) {
-        this.turnos.push({ ...turno, 'paciente': (paciente.apellido + ', ' + paciente.nombre) })
-      }
+      res.forEach(turno => {
+        this.pacientes.forEach(paciente => {
+          if (turno.paciente_id == paciente.uid) {
+            this.turnos.push({ ...turno, 'paciente': { apellido: paciente.apellido, nombre: paciente.nombre } })
+          }
+        });
+      });
     });
-  });
-});
-}
+  }
 
   aceptarTurno(turno: any, estadoNuevo: string) {
 
@@ -58,79 +62,98 @@ export class MisturnosEspecialistaComponent implements OnInit {
       estado: estadoNuevo,
       hora: turno.hora,
       paciente_id: turno.paciente_id,
-      resenia:turno.resenia,
-      comentario_cancelacion:turno.comentario_cancelacion,
-      comentario_rechazo:  turno.comentario_rechazo,
-      calificacion_atencion:turno.calificacion_atencion
+      resenia: turno.resenia,
+      comentario_cancelacion: turno.comentario_cancelacion,
+      comentario_rechazo: turno.comentario_rechazo,
+      calificacion_atencion: turno.calificacion_atencion
     }
 
-    this.turnosSrv.actualizarTurno(turno.doc_id, turnoUpd);
+    this.turnosSrv.actualizarTurno(turno.doc_id, turnoUpd).then((res) => {
+      Swal.fire('Turno aceptado');
+    });
   }
 
-  async rechazarTurno(turno: any, nuevoEstado: string) {
-    let comentario = '';
-    const { value: text } = await Swal.fire({
-      input: 'textarea',
-      inputLabel: 'Comente porque rechaza el turno',
-      inputPlaceholder: 'Escriba su comentario...',
-      inputAttributes: {
-        'aria-label': 'Escriba su comentario...'
-      },
-      showCancelButton: true
-    }) 
-
-     
-    comentario = text;
-
-    let turnoUpd = {
-      dia: turno.dia,
-      especialidad: turno.especialidad,
-      especialista_id: turno.especialista_id,
-      estado: nuevoEstado,
-      hora: turno.hora,
-      paciente_id: turno.paciente_id,
-      comentario_rechazo: comentario,
-      resenia:turno.resenia,
-      comentario_cancelacion:turno.comentario_cancelacion,
-      calificacion_atencion: turno.calificacion_atencion
-    } 
-    this.turnosSrv.actualizarTurno(turno.doc_id, turnoUpd);
+  rechazarTurno(turno: any, nuevoEstado: string) {
+    Swal.fire({
+      title: 'Seguro de rechazar el turno?',
+      showDenyButton: true,
+      confirmButtonText: 'Si'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          input: 'textarea',
+          inputLabel: 'Comente porque rechaza el turno',
+          inputPlaceholder: 'Escriba su comentario...',
+          inputAttributes: {
+            'aria-label': 'Escriba su comentario...'
+          },
+          showCancelButton: true
+        }).then((respuesta) => {
+          turno.estado = nuevoEstado;
+          let turnoUpd = {
+            dia: turno.dia,
+            especialidad: turno.especialidad,
+            especialista_id: turno.especialista_id,
+            estado: nuevoEstado,
+            hora: turno.hora,
+            paciente_id: turno.paciente_id,
+            comentario_rechazo: respuesta.value,
+            resenia: turno.resenia,
+            comentario_cancelacion: turno.comentario_cancelacion,
+            calificacion_atencion: turno.calificacion_atencion
+          }
+          this.turnosSrv.actualizarTurno(turno.doc_id, turnoUpd).then((res) => {
+            Swal.fire('Turno rechazado')
+          });
+        })
+      }
+    })
   }
 
 
   async cancelarTurno(turno: any, nuevoEstado: string) {
     let comentario = '';
-    const { value: text } = await Swal.fire({
-      input: 'textarea',
-      inputLabel: 'Comente porque cancela el turno',
-      inputPlaceholder: 'Escriba su comentario...',
-      inputAttributes: {
-        'aria-label': 'Escriba su comentario...'
-      },
-      showCancelButton: true
-    }) 
-
-     
-    comentario = text;
-
-    let turnoUpd = {
-      dia: turno.dia,
-      especialidad: turno.especialidad,
-      especialista_id: turno.especialista_id,
-      estado: nuevoEstado,
-      hora: turno.hora,
-      paciente_id: turno.paciente_id,
-      comentario_cancelacion: comentario,
-      resenia: turno.resenia, 
-      comentario_rechazo: turno.comentario_rechazo,
-      calificacion_atencion:turno.calificacion_atencion
-    } 
-    this.turnosSrv.actualizarTurno(turno.doc_id, turnoUpd);
+    Swal.fire({
+      title: 'Seguro de cancelar el turno?',
+      showDenyButton: true,
+      confirmButtonText: 'Si'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          input: 'textarea',
+          inputLabel: 'Comente porque cancela el turno',
+          inputPlaceholder: 'Escriba su comentario...',
+          inputAttributes: {
+            'aria-label': 'Escriba su comentario...'
+          },
+          showCancelButton: true
+        }).then((respuesta) => {
+          console.log('motivo de cancelacion: ' + respuesta.value)
+          turno.estado = nuevoEstado;
+          comentario = respuesta.value;
+          let turnoUpd = {
+            dia: turno.dia,
+            especialidad: turno.especialidad,
+            especialista_id: turno.especialista_id,
+            estado: 'cancelado',
+            hora: turno.hora,
+            paciente_id: turno.paciente_id,
+            comentario_cancelacion: comentario,
+            resenia: turno.resenia,
+            comentario_rechazo: turno.comentario_rechazo,
+            calificacion_atencion: turno.calificacion_atencion
+          }
+          this.turnosSrv.actualizarTurno(turno.doc_id, turnoUpd).then((fin) => {
+            Swal.fire('Turno cancelado')
+          });
+        });
+      }
+    });
   }
 
-  async dejarResenia(turno:any){
+  async dejarResenia(turno: any) {
     let comentario = '';
-    const { value: text } = await Swal.fire({
+    Swal.fire({
       input: 'textarea',
       inputLabel: 'Comente una reseña o diagnostico realizado',
       inputPlaceholder: 'Escriba su comentario...',
@@ -138,33 +161,39 @@ export class MisturnosEspecialistaComponent implements OnInit {
         'aria-label': 'Escriba su comentario...'
       },
       showCancelButton: true
-    }) 
-
-     
-    comentario = text;
-  
-    let turnoUpd = {
-      dia: turno.dia,
-      especialidad: turno.especialidad,
-      especialista_id: turno.especialista_id,
-      estado: 'finalizado',
-      hora: turno.hora,
-      paciente_id: turno.paciente_id,
-      resenia: ''+comentario, 
-      comentario_cancelacion:turno.comentario_cancelacion,
-      comentario_rechazo: turno.comentario_rechazo,
-      calificacion_atencion: turno.calificacion_atencion
-    } 
-
-      console.log(turnoUpd)
-    this.turnosSrv.actualizarTurno(turno.doc_id, turnoUpd);
+    }).then((res) => {
+      if (!res.isDismissed) {
+        let turnoUpd = {
+          dia: turno.dia,
+          especialidad: turno.especialidad,
+          especialista_id: turno.especialista_id,
+          estado: 'finalizado',
+          hora: turno.hora,
+          paciente_id: turno.paciente_id,
+          resenia: '' + comentario,
+          comentario_cancelacion: turno.comentario_cancelacion,
+          comentario_rechazo: turno.comentario_rechazo,
+          calificacion_atencion: turno.calificacion_atencion
+        }
+        turno.estado = 'finalizado';
+        console.log(turnoUpd)
+        this.turnosSrv.actualizarTurno(turno.doc_id, turnoUpd).then((res) => {
+          this.turnoFinalizado_flag = true;
+          this.turnoFinalizado = { ...turnoUpd, turno_id: turno.doc_id };
+        });
+      }
+    })
   }
 
-  verResenia(turno:any){
+  manejarHistoria(event:any){
+    this.turnoFinalizado_flag= event;
+  }
+
+  verResenia(turno: any) {
     Swal.fire({
       icon: 'info',
       title: 'Reseña',
-      text: ''+ turno.resenia 
+      text: '' + turno.resenia
     })
   }
 

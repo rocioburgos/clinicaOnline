@@ -1,25 +1,40 @@
- 
 <div class="container overflow-hidden">
 
-    <div class="row gx-5">
+  <div class="row gx-5">
 
-      <div class="col">
-       <div class="p-3 border bg-light">
-          <h1>Crear usuario</h1>
-          <button (click)="rutear('registro')"><img src="./../../../../assets/registroAdministrador.png" width="305px"></button>
-       </div>
+    <div class="col">
+      <div class="p-3 border bg-light">
+        <h1>Crear usuario</h1>
+        <button (click)="rutear('registro')"><img src="./../../../../assets/registroAdministrador.png"
+            width="305px"></button>
       </div>
-
-
-      <div class="col">
-        <div class="p-3 border bg-light">
-            <h1>Panel de usuarios</h1>
-            <button (click)="rutear('administracion/panelespecialistas')"> <img src="./../../../../assets/panelUsuarios.png"width="340px" ></button>
-            
-        </div>
-      </div>
-      <div *ngIf='mostrar2' class="lds-heart carga"><div></div></div>
-      <div *ngIf='mostrar1' class="lds-dual-ring carga"></div> 
     </div>
- 
+
+
+    <div class="col">
+      <div class="p-3 border bg-light">
+        <h1>Panel de usuarios</h1>
+        <button (click)="rutear('administracion/panelespecialistas')"> <img src="./../../../../assets/panelUsuarios.png"
+            width="340px"></button>
+
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="p-3 border bg-light">
+        <h1>Historias clinicas</h1>
+        <button (click)="rutear('historiasclinicas')"> <img src="./../../../../assets/panelUsuarios.png"
+            width="340px"></button>
+      </div>
+    </div>
+    <div class="col">
+      <div class="p-3 border bg-light">
+        <h1>Estadisticas</h1>
+        <button (click)="rutear('administracion/estadisticas')"> <img src="./../../../../assets/estadisticas.jpg"
+            width="340px"></button>
+      </div>
+    </div>
+    
   </div>
+
+</div>

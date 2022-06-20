@@ -34,9 +34,9 @@
                     <tr class="table-dark" *ngFor="let turno of turnos  | filtroEspecialista:filtro">
                         <th>{{turno.dia}} </th>
                         <td> {{turno.hora}} </td>
-                        <td> {{turno.estado}} </td>
+                        <td  [appMostrarEstado]="turno.estado" >{{turno.estado}}</td>
                         <td> {{turno.especialidad}}</td>
-                        <td> {{turno.paciente}}</td>
+                        <td  > {{turno.paciente | nombreapellido}}</td>
                         <button class="btn btn-danger" *ngIf="turno.estado== 'pendiente confirmacion' "
                             (click)="rechazarTurno(turno, 'rechazado')">Rechazar</button>
                         <button class="btn btn-success" *ngIf="turno.estado == 'pendiente confirmacion' "
@@ -51,3 +51,4 @@
 
                 </tbody>
             </table>
+        <app-historia *ngIf="turnoFinalizado_flag" [turnoFinalizado]="turnoFinalizado" (onHistoriaFinalizada)="manejarHistoria($event)"></app-historia>
