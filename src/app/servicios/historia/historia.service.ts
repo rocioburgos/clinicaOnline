@@ -28,5 +28,10 @@ export class HistoriaService {
                                                 ) ;
     return this.historiaColecction.valueChanges({idField: "doc_id"});
   }
+
+  traerHistoriasOrdenadas(){ 
+    this.historiaColecction = this.afs.collection('historiaclinica',ref => ref.orderBy('dia',  "asc"));
+    return this.historiaColecction.valueChanges({idField: "doc_id"});
+  }
  
 }

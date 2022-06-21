@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { EstadisticasComponent } from './estadisticas/estadisticas.component';
 import { PanelEspecialistasComponent } from './panel-especialistas/panel-especialistas.component';
 import { PrincipalComponent } from './principal/principal.component';
+import { TurnosusuarioComponent } from './turnosusuario/turnosusuario.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'estadisticas',
     component: EstadisticasComponent
+  },
+  {
+    path: 'turnosUsuario',
+    component: TurnosusuarioComponent
   },
   {
     path: '**',

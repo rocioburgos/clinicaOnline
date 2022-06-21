@@ -8,12 +8,14 @@ import { SpinnerModule } from 'src/app/shared/spinner/spinner.module';
 import { EstadisticasComponent } from './estadisticas/estadisticas.component'; 
  
 import { NgChartsModule } from 'ng2-charts';
+import { TurnosusuarioComponent } from './turnosusuario/turnosusuario.component';
 
 @NgModule({
   declarations: [
     PrincipalComponent,
     PanelEspecialistasComponent,
     EstadisticasComponent,
+    TurnosusuarioComponent,
      
   ],
   imports: [

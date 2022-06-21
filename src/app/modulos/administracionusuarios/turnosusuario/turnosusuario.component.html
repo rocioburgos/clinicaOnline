@@ -1,0 +1,43 @@
+<div class="container px-4">
+    <div class="row gx-5">
+        <div class="col">
+            <div class="p-3 border bg-light">
+                <h3>Usuarios</h3>
+                <div>
+                    <div class="form-check">
+                        <div class="btn-group " role="group" aria-label="Basic checkbox toggle button group">
+                            <div *ngFor="let paci of usuarios">
+                                <button class="btn btn-lg btn-primary" (click)="pacienteElegido(paci.uid)">
+                                    <img src="{{paci.archivo1}}" width="50px">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+<table class="table table-dark "  >
+    <thead>
+      <tr>
+        <th scope="col">Dia</th>
+        <th scope="col">Hora</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Especialidad</th>
+        <th scope="col">Especialista</th> 
+      </tr>
+    </thead>
+    <tbody  > 
+      <tr class="table-info" *ngFor="let turno of turnos">
+        <th>{{turno.dia}}   </th>
+        <td> {{turno.hora}} </td>
+        <td> {{turno.estado}} </td>
+        <td> {{turno.especialidad}}</td>
+        <td> {{turno.especialista}}</td> 
+      </tr> 
+    </tbody>  
+</table>
+</div>

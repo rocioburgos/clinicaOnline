@@ -4,8 +4,9 @@
             <div class="card-body">
                 <div class="row" *ngIf="usuario.perfil=='paciente'">
                     <div *ngFor="let atencion of listaHistoriaClinica">
-                        <label for=""> {{atencion.dia }} {{atencion.hora}}- {{atencion.especialidad}} </label>
+                        <label for=""> {{atencion?.dia}} {{atencion.hora}}- {{atencion.especialidad}} </label>
                         <button class="btn btn-info" (click)="verHistoria(atencion)">Ver Historia clinica</button>
+                        <button class="btn btn-success" (click)="descargar(atencion)"> Descargar </button>
                     </div>
                 </div>
                 <div class="row" *ngIf="usuario.perfil=='administrador'">
@@ -13,10 +14,38 @@
 
                         <img src="{{atencion.paciente.archivo1}} " class="img-redonda" width="50px">
                         <label>{{atencion.paciente.apellido }}, {{atencion.paciente.nombre }} </label>
-                        <label for=""> {{atencion.HC.dia }} {{atencion.HC.hora}}- {{atencion.HC.especialidad}} </label>
+                        <label> {{atencion.HC.dia }} {{atencion.HC.hora}}- {{atencion.HC.especialidad}} </label>
                         <button class="btn btn-info" (click)="verHistoria(atencion.HC)">Ver Historia clinica</button>
+
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div *ngIf="mostrarTabla">
+        <button class="btn btn-success" (click)="downloadPDF()"> Descargar </button>
+        <div id="descarga">
+            <img id="icono" src="./../../../assets/favicon/fav.png" width="60px">
+            <h2>Fecha de emision: {{ahora}} </h2>
+            <h3>Historia clinica {{usuario.apellido}},{{usuario.nombre }} </h3>
+
+
+            <div class="card" style="width: 18rem;">
+                <div class="card-header">
+                    Historia clinica {{atencion_descarga.dia }} {{atencion_descarga.hora}}
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li>Especialidad: {{atencion_descarga.especialidad}} </li>
+                    <li class="list-group-item">Altura: {{atencion_descarga.altura}} </li>
+                    <li class="list-group-item">peso: {{atencion_descarga.peso}}</li>
+                    <li class="list-group-item">presion: {{atencion_descarga.presion}}</li>
+                    <li class="list-group-item">temperatura: {{atencion_descarga.temperatura}}</li>
+                    <div *ngFor="let opc of atencion_descarga.opcionales">
+                        <li class="list-group-item" *ngIf="opc.value!=''">{{opc.key}}: {{opc.value}} </li>
+                    </div> 
+                </ul>
             </div>
         </div>
     </div>

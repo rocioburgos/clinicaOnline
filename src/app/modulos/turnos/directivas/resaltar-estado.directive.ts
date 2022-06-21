@@ -20,6 +20,7 @@ export class ResaltarEstadoDirective {
 
   private resaltar(color: boolean): void {
     if(color == true){
+      
       this.el.nativeElement.style.backgroundColor = '#3f9121'; //verde
     }else{
       this.el.nativeElement.style.backgroundColor = '#de2837'; //rojo
