@@ -18,8 +18,10 @@
                             <button class="btn btn-primary btn-block mt-3"  (click)="descargar(2)">Ver turnos por especialidad <i class="fa fa-download" ></i></button>
                     </div> 
                 </div>
+
             </div>
  
+            <app-turnosporespecialidad *ngIf="mostrarTurnosEspecialidad"></app-turnosporespecialidad>
         </div>
     </div>
 </div>

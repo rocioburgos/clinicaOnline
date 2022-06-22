@@ -1,26 +1,23 @@
-import {  Component , ViewChild } from '@angular/core';
+import {  Component , OnInit, ViewChild } from '@angular/core';
 import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
 import { LogsesionService } from 'src/app/servicios/logsesion.service';
 import { ArchivosService } from 'src/app/servicios/archivos/archivos.service';
 import { EspecialidadesService } from 'src/app/servicios/especialidades/especialidades.service';
 import { TurnosService } from 'src/app/servicios/turnos/turnos.service';
  
-import DatalabelsPlugin from 'chartjs-plugin-datalabels';
-import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
-import { BaseChartDirective } from 'ng2-charts';
 @Component({
   selector: 'app-estadisticas',
   templateUrl: './estadisticas.component.html',
   styleUrls: ['./estadisticas.component.css']
 })
-export class EstadisticasComponent {
+export class EstadisticasComponent implements OnInit {
  
   sesiones:Array<any>=[];
   usuarios:Array<any>=[];
   usuarios_sesiones: Array<any>= [];
   especialidades:Array<any>=[];
   turnos:Array<any>=[];
- 
+  mostrarTurnosEspecialidad:boolean= false;
   
   constructor(private logSesion:LogsesionService, private usrSrv:UsuarioService,
      private archivoSrv:ArchivosService, private espeSrv:EspecialidadesService,
@@ -45,7 +42,9 @@ export class EstadisticasComponent {
 
   }
  
+ ngOnInit(): void {
  
+ }
 
   //contar ingresos al sistema por usuario, y los datos del usuario
   ingresosAlSistema():Array<any>{ 
@@ -66,27 +65,6 @@ export class EstadisticasComponent {
      return usuarios_sesiones;
   }
 
-  //Turnos por especialidad
-  //grafico a usar : de torta
-  //recorrer las especialidades, y dentro recorrer los turnos
-  //preguntando si el turno es de esa especialidad, y ahi se hace +1
-  calcularTurnosPorEspecialidad(){
-    let resultado:Array<any>=[];
-    let cant=0;
-    
-    for(let i=0; i <this.especialidades.length; i++){
-      console.log(this.especialidades[i] )
-     cant=0;
-     resultado[i]=({especialidad: this.especialidades[i].nombre, cantidadTurnos:0 })
-      this.turnos.forEach(turno => {
-        if(this.especialidades[i].nombre == turno.especialidad){
-          cant+=1;
-        }
-      });
-      resultado[i].cantidadTurnos= cant;  
-    }
-    return resultado;
-  }
 
   descargar(opcion:number){
      
@@ -95,7 +73,7 @@ export class EstadisticasComponent {
          this.archivoSrv.exportAsExcelFile(this.ingresosAlSistema(), 'LogsUsuarios');
         break;
       case 2:
-        this.calcularTurnosPorEspecialidad()
+        this.mostrarTurnosEspecialidad=true;
         break
     
       default:
