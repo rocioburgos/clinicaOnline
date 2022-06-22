@@ -31,7 +31,7 @@
                         <h4>Email: {{usuario.email}}</h4>
                     </div>
                     <div class="col-md-6 mx-auto mt-2 text-center">
-                        <h4>Tipo de usuario: {{usuario.perfil}}</h4>
+                        <h4 [appResaltar]="color">Tipo de usuario: {{usuario.perfil}}</h4>
                         <div class="col-md-6 mx-auto mt-2 text-center">
                             <h4 *ngIf="usuario.perfil=='especialista'">Especialidades:</h4>
                             <h5 *ngFor="let espe of usuario.espe"> {{espe}}</h5>

@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class MisturnosEspecialistaComponent implements OnInit {
 
+  color='';
   turnoFinalizado_flag = false;
   turnoFinalizado: any;
   especialidadesLista: Array<any> = [];

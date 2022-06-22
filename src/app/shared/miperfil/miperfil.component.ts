@@ -9,6 +9,7 @@ import { HorariosService } from 'src/app/servicios/horarios/horarios.service';
 })
 export class MiperfilComponent implements OnInit {
 
+  color:string='red';
   public usuario: Usuario | any;
   tieneHorarios: boolean | any; //si este especialista tiene horarios seteados
   horarios: any;

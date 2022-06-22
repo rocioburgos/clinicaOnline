@@ -21,6 +21,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { HistoriaClinicaComponent } from './shared/historia-clinica/historia-clinica.component';
 import { MispacientesComponent } from './shared/mispacientes/mispacientes.component';
 import { AtencionPipe } from './pipes/atencion.pipe';
+import { ResaltarDirective } from './directivas/resaltar.directive'; 
  
   
 
@@ -35,7 +36,8 @@ import { AtencionPipe } from './pipes/atencion.pipe';
     NavbarComponent,
     HistoriaClinicaComponent,
     MispacientesComponent,
-    AtencionPipe 
+    AtencionPipe,
+    ResaltarDirective 
      
   ],
   imports: [

@@ -9,6 +9,8 @@ import { EstadisticasComponent } from './estadisticas/estadisticas.component';
  
 import { NgChartsModule } from 'ng2-charts';
 import { TurnosusuarioComponent } from './turnosusuario/turnosusuario.component';
+import { ResaltarEspDirective } from './directivas/resaltar-esp.directive';
+ 
 
 @NgModule({
   declarations: [
@@ -16,6 +18,7 @@ import { TurnosusuarioComponent } from './turnosusuario/turnosusuario.component'
     PanelEspecialistasComponent,
     EstadisticasComponent,
     TurnosusuarioComponent,
+    ResaltarEspDirective 
      
   ],
   imports: [

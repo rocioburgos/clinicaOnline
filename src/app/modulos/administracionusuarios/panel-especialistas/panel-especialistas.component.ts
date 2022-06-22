@@ -11,7 +11,7 @@ import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
 export class PanelEspecialistasComponent   {
 
   especialistas:Array<any>=[]; 
- 
+  
  //para el modal de crear especialidad
  @ViewChild("myModalConf", { static: false }) myModalConf?: TemplateRef<any>;
  nuevoEstado:any;

@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 
 @Directive({
   selector: '[appResaltarEstado]'
@@ -6,25 +6,23 @@ import { Directive, ElementRef, Input } from '@angular/core';
 export class ResaltarEstadoDirective {
 
   constructor(private el: ElementRef) { }
-
   @Input() colorBase!: string;
   @Input('appResaltarEstado')resaltarColor: (boolean | undefined);
-  
-  ngOnInit() {
-    // const aux = this.el.nativeElement;
+ 
+  @Input() defaultColor = '';
 
-    console.log(this.resaltarColor);
+  @Input() appHighlight = '';
 
-    this.resaltar(this.resaltarColor!);
+  @HostListener('mouseenter') onMouseEnter() {
+    this.highlight(this.appHighlight || this.defaultColor || 'red');
   }
 
-  private resaltar(color: boolean): void {
-    if(color == true){
-      
-      this.el.nativeElement.style.backgroundColor = '#3f9121'; //verde
-    }else{
-      this.el.nativeElement.style.backgroundColor = '#de2837'; //rojo
-    }
+  @HostListener('mouseleave') onMouseLeave() {
+    this.highlight('');
+  }
+
+  private highlight(color: string) {
+    this.el.nativeElement.style.backgroundColor = color;
   }
 
 }

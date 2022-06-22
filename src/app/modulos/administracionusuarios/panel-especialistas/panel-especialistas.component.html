@@ -19,8 +19,9 @@
     </thead>
     <tbody>
       <tr *ngFor='let item of especialistas'>
+        <div appResaltarEsp>
         <td> <img src="{{item.archivo}} " width="50px"></td>
-        <td>{{item.email}}</td>
+        <td >{{item.email}}</td>
         <td>{{item.nombre}} {{item.apellido}}</td>
         <td>{{item.estado}}</td>
         <td>{{item.edad}}</td>
@@ -30,8 +31,8 @@
           </ol>
         </td>
         <td> {{item.perfil}} </td>
-        <td>
-
+      </div>
+        <td> 
           <div *ngIf="item.estado== 'pendiente'">
             <button type="button" class="btn btn-success" (click)="actualizarEstado(item.uid, 'habilidato')">
               Aceptar
@@ -53,6 +54,7 @@
             </button>
           </div>
         </td>
+ 
       </tr>
     </tbody>
   </table>
