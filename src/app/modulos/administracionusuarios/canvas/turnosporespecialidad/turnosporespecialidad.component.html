@@ -1,3 +1,9 @@
 <div id="divChart" >
-    <canvas id="turnosPorEspecialidad" ></canvas>
+    <img id="icono" src="./../../../../../assets/favicon/fav.png" width="30px">
+    <h4>Cantidad de turnos por especialdiad</h4>
+    <h5>Fecha: {{ahora}} </h5>
+
+    <canvas id="turnosPorEspecialidad"></canvas> 
 </div>
+<button class="btn btn-success" (click)="downloadPDF()">Descargar</button>
+ 

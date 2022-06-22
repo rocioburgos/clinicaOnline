@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-
+import jsPDF from 'jspdf'; 
+import html2canvas from 'html2canvas';
+ 
 import{Chart} from 'node_modules/chart.js'
 import { EspecialidadesService } from 'src/app/servicios/especialidades/especialidades.service';
 import { TurnosService } from 'src/app/servicios/turnos/turnos.service';
+import moment from 'moment';
 @Component({
   selector: 'app-turnosporespecialidad',
   templateUrl: './turnosporespecialidad.component.html',
@@ -14,6 +17,8 @@ export class TurnosporespecialidadComponent implements OnInit {
   labels:Array<string>=[];
   data:Array<number>=[];
   cant=0;
+  
+  public ahora= moment().format( "DD-MM-YYYY HH:mm");
   constructor( private espeSrv:EspecialidadesService,  private turnosSrv:TurnosService) { 
     
     this.turnosSrv.traerTurnos().subscribe((resp)=>{
@@ -26,7 +31,7 @@ export class TurnosporespecialidadComponent implements OnInit {
         this.cant=0;
         this.labels.push(esp.nombre)
         this.turnos.forEach(turno => {
-          console.log(turno.especialidad)
+          
           if( esp.nombre == turno.especialidad){
             this.cant+=1;
           }
@@ -34,10 +39,7 @@ export class TurnosporespecialidadComponent implements OnInit {
         this.data.push(this.cant);  
       });
     });
-
-
-  //  this.data= this.calcularTurnosPorEspecialidad();
-    console.log(this.data)
+ 
   }
 
   ngOnInit(): void {
@@ -69,6 +71,31 @@ export class TurnosporespecialidadComponent implements OnInit {
         }]
     } 
 });
+  }
+
+  downloadPDF() {
+    // Extraemos el
+    const DATA:any = document.getElementById('divChart');
+    const doc = new jsPDF('p', 'pt', 'a4');
+    const options = {
+      background: 'white',
+      scale: 3
+    };
+    html2canvas(DATA, options).then((canvas) => {
+
+      const img = canvas.toDataURL('image/PNG');
+
+      // Add image Canvas to PDF
+      const bufferX = 15;
+      const bufferY = 15;
+      const imgProps = (doc as any).getImageProperties(img);
+      const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      doc.addImage(img, 'PNG', bufferX, bufferY, pdfWidth, pdfHeight, undefined, 'FAST');
+      return doc;
+    }).then((docResult) => {
+      docResult.save(`${new Date().toISOString()}_.pdf`);
+    });
   }
  
 }
