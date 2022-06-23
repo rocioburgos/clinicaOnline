@@ -23,6 +23,11 @@ export class TurnosService {
     this.turnosCollection = this.afs.collection('turnos');
     return this.turnosCollection.valueChanges({idField: "doc_id"});
   }
+
+  traerTurnos_ordenadosDia(){ 
+    this.turnosCollection = this.afs.collection('turnos', ref=>ref.orderBy('dia','asc'));
+    return this.turnosCollection.valueChanges({idField: "doc_id"});
+  }
   
   traerTurnosById(uid:string){ 
     this.turnosCollection = this.afs.collection('turnos', ref => 

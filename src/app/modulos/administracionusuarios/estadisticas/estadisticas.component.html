@@ -3,25 +3,28 @@
         <div class="card">
             <div class="card-body">
                 <h2 class="text-center"><b>Estadisticas de la clinica</b></h2>
-                <div class="row"  >
-                    <div class="col-md-4 mx-auto mt-5 text-center color">
-                        <label for="desde">Desde : &nbsp;</label>
-                        <input class="largo" type="date" name="desde" id="desde" >
-                        &nbsp;&nbsp;
-                        <button class="btn btn-warning" >Consultar</button>
-                    </div>
-                </div>
+
                 <div class="row">
                     <div class="col-md-4 mx-auto mt-5 text-center">
-                        <button class="btn btn-primary btn-block mt-3"  (click)="descargar(1)">Descargar logs de ingresos
-                            al sistema <i class="fa fa-download" ></i></button>
-                            <button class="btn btn-primary btn-block mt-3"  (click)="descargar(2)">Ver turnos por especialidad <i class="fa fa-download" ></i></button>
-                    </div> 
+                        <button class="btn btn-primary btn-block mt-3" (click)="descargar(1)">Descargar logs de ingresos
+                            al sistema <i class="fa fa-download"></i></button>
+                        <button class="btn btn-primary btn-block mt-3" (click)="descargar(2)">Ver turnos por
+                            especialidad <i class="fa fa-download"></i></button>
+                        <button class="btn btn-primary btn-block mt-3" (click)="descargar(3)">Ver turnos por dia<i
+                                class="fa fa-download"></i></button>
+                        <button class="btn btn-primary btn-block mt-3" (click)="descargar(4)">Ver turnos solicitados por medico<i
+                                class="fa fa-download"></i></button>
+                        <button class="btn btn-primary btn-block mt-3" (click)="descargar(5)">Ver turnos  finalizados por medico<i
+                                class="fa fa-download"></i></button>
+                    </div>
                 </div>
 
             </div>
- 
+
             <app-turnosporespecialidad *ngIf="mostrarTurnosEspecialidad"></app-turnosporespecialidad>
+            <app-turnospordia *ngIf="mostrarTurnosPorDia"></app-turnospordia>
+            <app-turnos-solicitados *ngIf="mostrarTurnosSolicitados"></app-turnos-solicitados>
+            <app-turnos-finalizados *ngIf="mostrarTurnosFinalizados"></app-turnos-finalizados>
         </div>
     </div>
 </div>

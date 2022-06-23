@@ -11,6 +11,10 @@ import { NgChartsModule } from 'ng2-charts';
 import { TurnosusuarioComponent } from './turnosusuario/turnosusuario.component';
 import { ResaltarEspDirective } from './directivas/resaltar-esp.directive';
 import { TurnosporespecialidadComponent } from './canvas/turnosporespecialidad/turnosporespecialidad.component';
+import { TurnospordiaComponent } from './canvas/Turnospordia/turnospordia.component';
+import { TurnosSolicitadosComponent } from './canvas/turnos-solicitados/turnos-solicitados.component';
+import { TurnosFinalizadosComponent } from './canvas/turnos-finalizados/turnos-finalizados.component';
+ 
  
 
 @NgModule({
@@ -20,7 +24,10 @@ import { TurnosporespecialidadComponent } from './canvas/turnosporespecialidad/t
     EstadisticasComponent,
     TurnosusuarioComponent,
     ResaltarEspDirective,
-    TurnosporespecialidadComponent 
+    TurnosporespecialidadComponent,
+    TurnospordiaComponent,
+    TurnosSolicitadosComponent,
+    TurnosFinalizadosComponent
      
   ],
   imports: [

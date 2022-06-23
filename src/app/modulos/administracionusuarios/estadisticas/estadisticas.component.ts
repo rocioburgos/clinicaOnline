@@ -16,12 +16,19 @@ export class EstadisticasComponent implements OnInit {
   usuarios:Array<any>=[];
   usuarios_sesiones: Array<any>= [];
   especialidades:Array<any>=[];
-  turnos:Array<any>=[];
+  turnos:Array<any>=[]; 
   mostrarTurnosEspecialidad:boolean= false;
-  
+  mostrarTurnosPorDia:boolean= false;
+  mostrarTurnosSolicitados:boolean= false;
+  mostrarTurnosFinalizados:boolean= false;
   constructor(private logSesion:LogsesionService, private usrSrv:UsuarioService,
      private archivoSrv:ArchivosService, private espeSrv:EspecialidadesService,
      private turnosSrv:TurnosService) {
+      this.turnosSrv.traerTurnos_ordenadosDia().subscribe((resp)=>{
+        this.turnos= resp;
+      });
+
+      console.log(this.turnos)
     this.logSesion.traerSesiones().subscribe((resp)=>{
       this.sesiones= resp;
     });
@@ -34,16 +41,9 @@ export class EstadisticasComponent implements OnInit {
      
       this.especialidades= resp;
     });
-
-     
-    this.turnosSrv.traerTurnos().subscribe((resp)=>{
-      this.turnos= resp;
-    });
-
   }
  
  ngOnInit(): void {
- 
  }
 
   //contar ingresos al sistema por usuario, y los datos del usuario
@@ -74,8 +74,28 @@ export class EstadisticasComponent implements OnInit {
         break;
       case 2:
         this.mostrarTurnosEspecialidad=true;
+        this.mostrarTurnosPorDia=false;
+        this.mostrarTurnosSolicitados= false;
+        this.mostrarTurnosFinalizados= false;
         break
-    
+    case 3:
+      this.mostrarTurnosPorDia=true;
+      this.mostrarTurnosEspecialidad=false;
+      this.mostrarTurnosSolicitados= false;
+      this.mostrarTurnosFinalizados= false;
+      break;
+      case 4:
+        this.mostrarTurnosPorDia=false;
+        this.mostrarTurnosEspecialidad=false;
+        this.mostrarTurnosSolicitados= true;
+        this.mostrarTurnosFinalizados= false;
+        break;
+        case 5:
+          this.mostrarTurnosPorDia=false;
+          this.mostrarTurnosEspecialidad=false;
+          this.mostrarTurnosSolicitados= false;
+          this.mostrarTurnosFinalizados= true;
+          break;
       default:
         break;
     }

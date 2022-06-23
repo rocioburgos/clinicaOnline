@@ -1,0 +1,23 @@
+
+<div class="row">
+
+
+    <div class="col-md-4 mx-auto mt-5 text-center color">
+        <label for="">Cantidad de turnos solicitados</label>
+        <br>
+        <label for="desde">Desde : &nbsp;</label>
+        <input class="largo" type="date" name="desde" id="desde">
+        &nbsp;&nbsp;
+        <button class="btn btn-warning">Consultar</button>
+    </div>
+</div>
+
+<div id="divChart" >
+    <img id="icono" src="./../../../../../assets/favicon/fav.png" width="30px">
+    <h4>Cantidad de turnos solicitados por especialista</h4>
+    <h5>Fecha: {{ahora}} </h5>
+  
+    <canvas id="turnosSoli"></canvas> 
+  </div>
+<button class="btn btn-success" (click)="downloadPDF()">Descargar</button>
+  
