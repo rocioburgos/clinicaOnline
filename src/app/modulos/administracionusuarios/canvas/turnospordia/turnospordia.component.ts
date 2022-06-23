@@ -49,12 +49,14 @@ export class TurnospordiaComponent implements OnInit {
   }
 
 ngOnInit(): void {
+
+  
   const myChart = new Chart("turnosPorDia", {
     type: 'line',
     data: {
       labels: this.dias,
       datasets: [{
-
+        label: 'Turnos por dia',
         data: this.data,
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
@@ -75,7 +77,7 @@ ngOnInit(): void {
         borderWidth: 1
       }]
     }
-  });
+  }); 
 }
 
 downloadPDF() {

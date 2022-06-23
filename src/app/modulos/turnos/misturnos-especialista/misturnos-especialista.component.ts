@@ -171,7 +171,7 @@ export class MisturnosEspecialistaComponent implements OnInit {
           estado: 'finalizado',
           hora: turno.hora,
           paciente_id: turno.paciente_id,
-          resenia: '' + comentario,
+          resenia: res.value,
           comentario_cancelacion: turno.comentario_cancelacion,
           comentario_rechazo: turno.comentario_rechazo,
           calificacion_atencion: turno.calificacion_atencion

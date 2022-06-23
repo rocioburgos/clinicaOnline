@@ -40,7 +40,7 @@
         <button class="btn btn-danger" *ngIf="turno.estado=='aceptado' || turno.estado=='pendiente confirmacion'" (click)="cancelarTurno(turno)">Cancelar</button>
         <button class="btn btn-info" *ngIf="turno.estado=='finalizado' || turno.resenia!='' " (click)="verResenia(turno)">Ver reseña</button>
         <button class="btn btn-info" *ngIf="turno.estado=='finalizado' || turno.resenia!='' " (click)="completarEncuesta(turno)">Completar encuesta</button>
-        <button class="btn btn-warning" *ngIf="turno.estado=='finalizado' || turno.resenia!='' " (click)="calificarAtencion(turno)">Calificar atencion</button>
+        <button class="btn btn-warning" *ngIf="turno.estado=='finalizado' && turno.resenia!='' " (click)="calificarAtencion(turno)">Calificar atencion</button>
       </tr> 
     </tbody>  
 </table>

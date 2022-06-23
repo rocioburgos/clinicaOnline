@@ -16,7 +16,7 @@ export class MisTurnosComponent implements OnInit {
   public especialidadesLista: Array<any> = [];
   public especialistasDisponibles: Array<any> = [];
   public turnosPaciente: Array<any> = [];
-  public filtro: string = '';
+  public filtro: string = ' ';
   completarEncuesta_flag:boolean= false;
   turnoEncuesta:any;
   constructor(private especialidadesSrv: EspecialidadesService, private especialistasSrv: UsuarioService,
@@ -78,7 +78,7 @@ cancelarTurno(turno: any) {
           showCancelButton: true
         }).then((respuesta) => {
           console.log('motivo de cancelacion: ' + respuesta.value)
-          
+          turno.estado='cancelado';
           comentario=respuesta.value;
           let turnoUpd = {
             dia: turno.dia,
@@ -142,7 +142,7 @@ cancelarTurno(turno: any) {
           dia: turno.dia,
           especialidad: turno.especialidad,
           especialista_id: turno.especialista_id,
-          estado: 'cancelado',
+          estado: turno.estado,
           hora: turno.hora,
           paciente_id: turno.paciente_id,
           comentario_cancelacion: turno.comentario_cancelacion,

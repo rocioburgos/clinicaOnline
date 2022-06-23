@@ -125,7 +125,7 @@ export class SacarTurnoComponent implements OnInit {
         retorno[0].horarios.forEach((horario:any) => {
           turnos.forEach(turno => {
              
-            if(turno.hora == horario.hora && turno.dia==retorno[0].dia){
+            if(turno.hora == horario.hora && turno.dia==retorno[0].dia && turno.estado!='cancelado'){
               horario.disponible=false
              
             }
